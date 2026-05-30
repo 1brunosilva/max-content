@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Concepto Development — Sistema de Ads MAX</title>
+<style>
+  :root {
+    --bg: #080810; --bg2: #0E0E1A; --card: #111120; --border: #1E1E38;
+    --white: #E8E8F0; --gray: #9090B0; --muted: #5A5A7A;
+    --violet: #8B5CF6; --accent: #5B5EF4; --cyan: #06B6D4;
+    --green: #10B981; --red: #EF4444; --yellow: #F59E0B;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--white); font-family: -apple-system, "Inter", sans-serif; min-height: 100vh; }
+
+  /* Header */
+  .header { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 20px 40px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; }
+  .logo { display: flex; align-items: center; gap: 10px; }
+  .logo svg { flex-shrink: 0; }
+  .logo-text .name { font-size: 13px; font-weight: 700; letter-spacing: 0.12em; }
+  .logo-text .sub { font-size: 11px; color: var(--gray); letter-spacing: 0.15em; }
+  .header h1 { font-size: 16px; font-weight: 600; color: var(--white); margin-left: 8px; }
+  .header-stats { margin-left: auto; display: flex; gap: 24px; }
+  .stat { text-align: right; }
+  .stat-value { font-size: 22px; font-weight: 800; color: var(--violet); letter-spacing: -0.03em; }
+  .stat-label { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* Tabs */
+  .tabs { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 40px; display: flex; gap: 4px; overflow-x: auto; }
+  .tab { padding: 14px 20px; font-size: 13px; font-weight: 500; color: var(--gray); border: none; background: none; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; white-space: nowrap; }
+  .tab:hover { color: var(--white); }
+  .tab.active { color: var(--violet); border-bottom-color: var(--violet); }
+
+  /* Content */
+  .content { padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
+
+  /* Section */
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* Calendar grid */
+  .calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 8px; }
+  .cal-day-label { text-align: center; font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; padding: 8px 0; }
+  .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+
+  /* Ad Card */
+  .ad-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; cursor: pointer; transition: all 0.2s; position: relative; }
+  .ad-card:hover { border-color: var(--violet); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(139,92,246,0.15); }
+  .ad-card .thumb { width: 100%; aspect-ratio: 3/4; background: linear-gradient(135deg, #0E0E1A 0%, #080810 100%); display: flex; align-items: center; justify-content: center; font-size: 28px; color: var(--muted); position: relative; overflow: hidden; }
+  .ad-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .ad-card .thumb .placeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .ad-card .thumb .placeholder span { font-size: 11px; color: var(--muted); }
+  .ad-card .card-info { padding: 10px 12px; }
+  .ad-card .card-name { font-size: 12px; font-weight: 600; color: var(--white); margin-bottom: 6px; line-height: 1.3; }
+  .ad-card .card-meta { display: flex; gap: 6px; flex-wrap: wrap; }
+  .lever-badge { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 7px; border-radius: 20px; }
+  .format-badge { font-size: 9px; font-weight: 600; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* Lever badge colors */
+  .lever-loss { background: rgba(239,68,68,0.15); color: #EF4444; }
+  .lever-identity { background: rgba(139,92,246,0.15); color: #8B5CF6; }
+  .lever-fomo { background: rgba(245,158,11,0.15); color: #F59E0B; }
+  .lever-mimetic { background: rgba(6,182,212,0.15); color: #06B6D4; }
+  .lever-contrast { background: rgba(16,185,129,0.15); color: #10B981; }
+  .lever-authority { background: rgba(91,94,244,0.15); color: #5B5EF4; }
+  .lever-zeigarnik { background: rgba(236,72,153,0.15); color: #EC4899; }
+
+  /* Status dot */
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; position: absolute; top: 8px; right: 8px; }
+  .status-done { background: var(--green); box-shadow: 0 0 8px var(--green); }
+  .status-pending { background: var(--muted); }
+
+  /* Grid for atoms/carousel sections */
+  .cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .cards-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* Section title */
+  .section-title { font-size: 13px; font-weight: 600; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .section-block { margin-bottom: 40px; }
+
+  /* Modal */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1000; align-items: center; justify-content: center; padding: 24px; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; }
+  .modal-img { aspect-ratio: 3/4; background: var(--card); border-radius: 20px 0 0 20px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .modal-img img { width: 100%; height: 100%; object-fit: contain; }
+  .modal-img .no-preview { font-size: 64px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .modal-img .no-preview span { font-size: 13px; color: var(--muted); }
+  .modal-info { padding: 32px; display: flex; flex-direction: column; gap: 20px; }
+  .modal-title { font-size: 22px; font-weight: 800; color: var(--white); line-height: 1.2; letter-spacing: -0.02em; }
+  .modal-id { font-size: 12px; color: var(--muted); letter-spacing: 0.08em; font-family: monospace; }
+  .modal-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+  .modal-copy { flex: 1; }
+  .copy-label { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 8px; }
+  .copy-lines { display: flex; flex-direction: column; gap: 4px; }
+  .copy-line { font-size: 13px; line-height: 1.5; color: var(--gray); }
+  .copy-line.violet { color: var(--violet); }
+  .copy-line.white { color: var(--white); }
+  .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn { padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s; }
+  .btn-primary { background: var(--violet); color: white; }
+  .btn-primary:hover { background: #7c3aed; }
+  .btn-secondary { background: var(--card); color: var(--gray); border: 1px solid var(--border); }
+  .btn-secondary:hover { color: var(--white); border-color: var(--gray); }
+  .modal-close { position: absolute; top: 16px; right: 16px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; color: var(--gray); font-size: 18px; cursor: pointer; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; }
+
+  /* Export command */
+  .export-cmd { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; font-family: monospace; font-size: 12px; color: var(--cyan); overflow-x: auto; white-space: nowrap; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .modal { grid-template-columns: 1fr; }
+    .modal-img { border-radius: 20px 20px 0 0; aspect-ratio: 1; }
+    .calendar-header, .calendar-grid { grid-template-columns: repeat(3, 1fr); }
+    .content { padding: 16px; }
+    .header { padding: 16px; }
+    .header-stats { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">
+    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+      <path d="M16 2L28.5 8.5V23.5L16 30L3.5 23.5V8.5Z" stroke="#7B3FFF" stroke-width="2.2" fill="none" stroke-linejoin="round"/>
+      <text x="16" y="22" text-anchor="middle" fill="#7B3FFF" font-size="14" font-weight="900" font-family="Inter,sans-serif">C</text>
+    </svg>
+    <div class="logo-text">
+      <div class="name">CONCEPTO</div>
+      <div class="sub">DEVELOPMENT</div>
+    </div>
+  </div>
+  <h1>Sistema de Ads MAX</h1>
+  <div class="header-stats">
+    <div class="stat">
+      <div class="stat-value" id="total-count">57</div>
+      <div class="stat-label">Composiciones</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" id="done-count">0</div>
+      <div class="stat-label">Exportadas</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">4</div>
+      <div class="stat-label">Semanas</div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab active" onclick="showTab('semana1')">Semana 1</button>
+  <button class="tab" onclick="showTab('semana2')">Semana 2</button>
+  <button class="tab" onclick="showTab('semana3')">Semana 3</button>
+  <button class="tab" onclick="showTab('semana4')">Semana 4</button>
+  <button class="tab" onclick="showTab('atoms')">Copy Atoms</button>
+  <button class="tab" onclick="showTab('carruseles')">Carruseles</button>
+  <button class="tab" onclick="showTab('paid')">Paid Ads</button>
+  <button class="tab" onclick="showTab('export')">Exportar</button>
+</div>
+
+<div class="content">
+
+  <!-- SEMANA 1 -->
+  <div class="section active" id="tab-semana1">
+    <div class="section-block">
+      <div class="section-title">Semana 1 — Loss Aversion · "El costo invisible"</div>
+      <div class="calendar-header">
+        <div class="cal-day-label">Lunes</div>
+        <div class="cal-day-label">Martes</div>
+        <div class="cal-day-label">Miércoles</div>
+        <div class="cal-day-label">Jueves</div>
+        <div class="cal-day-label">Viernes</div>
+        <div class="cal-day-label">Sábado</div>
+        <div class="cal-day-label">Domingo</div>
+      </div>
+      <div class="calendar-grid">
+        <div class="ad-card" onclick="openModal('B1_CostoInvisible1')">
+          <div class="thumb"><div class="placeholder">🗂️<span>Infográfico</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info">
+            <div class="card-name">El Costo Invisible #1</div>
+            <div class="card-meta">
+              <span class="lever-badge lever-loss">Loss Aversion</span>
+              <span class="format-badge">4:5</span>
+            </div>
+          </div>
+        </div>
+        <div class="ad-card" onclick="openModal('B2_MientrasDormias1')">
+          <div class="thumb"><div class="placeholder">🌙<span>MAX + Stats</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info">
+            <div class="card-name">Mientras Dormías #1</div>
+            <div class="card-meta">
+              <span class="lever-badge lever-fomo">FOMO</span>
+              <span class="format-badge">4:5</span>
+            </div>
+          </div>
+        </div>
+        <div class="ad-card" onclick="openModal('B3_MaxAccionHoteleria')">
+          <div class="thumb"><div class="placeholder">💬<span>MAX + Chat</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info">
+            <div class="card-name">MAX en Acción · Hotelería</div>
+            <div class="card-meta">
+              <span class="lever-badge lever-contrast">Contrast</span>
+              <span class="format-badge">4:5</span>
+            </div>
+          </div>
+        </div>
+        <div class="ad-card" onclick="openModal('B4_ElDato68')">
+          <div class="thumb"><div class="placeholder">📊<span>68%</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info">
+            <div class="card-name">El Dato · 68%</div>
+            <div class="card-meta">
+              <span class="lever-badge lever-authority">Anchoring</span>
+              <span class="format-badge">4:5</span>
+            </div>
+          </div>
+        </div>
+        <div class="ad-card" onclick="openModal('B5_OpinionChatbots')">
+          <div class="thumb"><div class="placeholder">🤖<span>Opinión</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info">
+            <div class="card-name">Opinión · Los chatbots</div>
+            <div class="card-meta">
+              <span class="lever-badge lever-contrast">Pratfall</span>
+              <span class="format-badge">4:5</span>
+            </div>
+          </div>
+        </div>
+        <div class="ad-card" onclick="openModal('B6_CulturaAspiracional1')">
+          <div class="thumb"><div class="placeholder">✨<span>Cultura</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info">
+            <div class="card-name">Cultura MAX · Aspiracional</div>
+            <div class="card-meta">
+              <span class="lever-badge lever-mimetic">Mimetic</span>
+              <span class="format-badge">4:5</span>
+            </div>
+          </div>
+        </div>
+        <div class="ad-card" style="border-style:dashed; opacity:0.3; cursor:default;">
+          <div class="thumb"><div class="placeholder">—</div></div>
+          <div class="card-info"><div class="card-name">Domingo libre</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 2 -->
+  <div class="section" id="tab-semana2">
+    <div class="section-block">
+      <div class="section-title">Semana 2 — Social Proof + Contrast · "Ya funciona en empresas como la mía"</div>
+      <div class="calendar-header">
+        <div class="cal-day-label">Lunes</div><div class="cal-day-label">Martes</div>
+        <div class="cal-day-label">Miércoles</div><div class="cal-day-label">Jueves</div>
+        <div class="cal-day-label">Viernes</div><div class="cal-day-label">Sábado</div>
+        <div class="cal-day-label">Domingo</div>
+      </div>
+      <div class="calendar-grid">
+        <div class="ad-card" onclick="openModal('C1_ErroresManuales')">
+          <div class="thumb"><div class="placeholder">⚠️<span>Copy Puro</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info"><div class="card-name">Errores Manuales #2</div>
+          <div class="card-meta"><span class="lever-badge lever-loss">Loss</span><span class="format-badge">4:5</span></div></div>
+        </div>
+        <div class="ad-card" onclick="openModal('C2_FinDeSemana')">
+          <div class="thumb"><div class="placeholder">📅<span>MAX + Stats</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info"><div class="card-name">Mientras Dormías · Fin de semana</div>
+          <div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">4:5</span></div></div>
+        </div>
+        <div class="ad-card" onclick="openModal('C3_ReportesAutomaticos')">
+          <div class="thumb"><div class="placeholder">📈<span>Dashboard</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info"><div class="card-name">MAX en Acción · Reportes</div>
+          <div class="card-meta"><span class="lever-badge lever-authority">Authority</span><span class="format-badge">4:5</span></div></div>
+        </div>
+        <div class="ad-card" onclick="openModal('C4_McKinsey34')">
+          <div class="thumb"><div class="placeholder">📊<span>34%</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info"><div class="card-name">El Dato · McKinsey 34%</div>
+          <div class="card-meta"><span class="lever-badge lever-authority">Authority</span><span class="format-badge">4:5</span></div></div>
+        </div>
+        <div class="ad-card" onclick="openModal('C5_EmpresasEstablecidas')">
+          <div class="thumb"><div class="placeholder">🏢<span>Opinión</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info"><div class="card-name">Opinión · Empresas Establecidas</div>
+          <div class="card-meta"><span class="lever-badge lever-identity">Identity</span><span class="format-badge">4:5</span></div></div>
+        </div>
+        <div class="ad-card" onclick="openModal('C6_MaxNocturna')">
+          <div class="thumb"><div class="placeholder">🌃<span>Cultura</span></div></div>
+          <div class="status-dot status-pending"></div>
+          <div class="card-info"><div class="card-name">Cultura MAX · Nocturna</div>
+          <div class="card-meta"><span class="lever-badge lever-mimetic">Mimetic</span><span class="format-badge">4:5</span></div></div>
+        </div>
+        <div class="ad-card" style="border-style:dashed;opacity:0.3;cursor:default;">
+          <div class="thumb"><div class="placeholder">—</div></div>
+          <div class="card-info"><div class="card-name">Domingo libre</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 3 -->
+  <div class="section" id="tab-semana3">
+    <div class="section-block">
+      <div class="section-title">Semana 3 — Authority + Urgency · "Los números son reales"</div>
+      <div class="calendar-header">
+        <div class="cal-day-label">Lunes</div><div class="cal-day-label">Martes</div>
+        <div class="cal-day-label">Miércoles</div><div class="cal-day-label">Jueves</div>
+        <div class="cal-day-label">Viernes</div><div class="cal-day-label">Sábado</div>
+        <div class="cal-day-label">Domingo</div>
+      </div>
+      <div class="calendar-grid">
+        <div class="ad-card" onclick="openModal('D1_RotacionLaboral')"><div class="thumb"><div class="placeholder">👥<span>6 meses</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">Rotación Laboral</div><div class="card-meta"><span class="lever-badge lever-loss">Loss</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('D2_TemporadaAlta')"><div class="thumb"><div class="placeholder">🏨<span>200 msg</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">Temporada Alta</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('D3_LeadNurturing')"><div class="thumb"><div class="placeholder">🔄<span>Timeline</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">Lead Nurturing · 5 días</div><div class="card-meta"><span class="lever-badge lever-authority">JTBD</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('D4_NueveX')"><div class="thumb"><div class="placeholder">📊<span>9x</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">El Dato · 9x más chances</div><div class="card-meta"><span class="lever-badge lever-authority">Anchoring</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('D5_EsperarElMomento')"><div class="thumb"><div class="placeholder">⏰<span>Opinión</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">Esperar el Momento</div><div class="card-meta"><span class="lever-badge lever-fomo">FOMO</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('D6_Uruguay')"><div class="thumb"><div class="placeholder">🌆<span>Times Sq.</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">Cultura · Uruguay</div><div class="card-meta"><span class="lever-badge lever-mimetic">Mimetic</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" style="border-style:dashed;opacity:0.3;cursor:default;"><div class="thumb"><div class="placeholder">—</div></div><div class="card-info"><div class="card-name">Domingo libre</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMANA 4 -->
+  <div class="section" id="tab-semana4">
+    <div class="section-block">
+      <div class="section-title">Semana 4 — Mimetic Desire + Identity · "Quiero ser la empresa que estudian"</div>
+      <div class="calendar-header">
+        <div class="cal-day-label">Lunes</div><div class="cal-day-label">Martes</div>
+        <div class="cal-day-label">Miércoles</div><div class="cal-day-label">Jueves</div>
+        <div class="cal-day-label">Viernes</div><div class="cal-day-label">Sábado</div>
+        <div class="cal-day-label">Domingo</div>
+      </div>
+      <div class="calendar-grid">
+        <div class="ad-card" onclick="openModal('E1_2025Tarde')"><div class="thumb"><div class="placeholder">📅<span>Copy</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">¿Cómo llegamos tan tarde?</div><div class="card-meta"><span class="lever-badge lever-fomo">Status Quo</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('E2_ContrasteMaximo')"><div class="thumb"><div class="placeholder">⚡<span>Split</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">Contraste Máximo · 24/7</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('E3_ElNumeroReal')"><div class="thumb"><div class="placeholder">💰<span>Dashboard</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">El Número Real · $28.540</div><div class="card-meta"><span class="lever-badge lever-mimetic">Mimetic</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('E4_DecisionMasCara')"><div class="thumb"><div class="placeholder">💸<span>Copy</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">La Decisión Más Cara</div><div class="card-meta"><span class="lever-badge lever-loss">Loss</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('E5_DecisionFinal')"><div class="thumb"><div class="placeholder">🎯<span>CTA</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">Decisión Final · CTA</div><div class="card-meta"><span class="lever-badge lever-authority">BJ Fogg</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" onclick="openModal('E6_ElFuturo')"><div class="thumb"><div class="placeholder">🌃<span>Times Sq.</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">El Futuro · Times Square</div><div class="card-meta"><span class="lever-badge lever-mimetic">Mimetic</span><span class="format-badge">4:5</span></div></div></div>
+        <div class="ad-card" style="border-style:dashed;opacity:0.3;cursor:default;"><div class="thumb"><div class="placeholder">—</div></div><div class="card-info"><div class="card-name">Domingo libre</div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COPY ATOMS -->
+  <div class="section" id="tab-atoms">
+    <div class="section-block">
+      <div class="section-title">Copy Atoms — Frases puras que funcionan solas</div>
+      <div class="cards-grid">
+        <div class="ad-card" onclick="openModal('A1_AmenazaSilenciosa')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">⚔️<span>Loss Aversion</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A1 · Amenaza Silenciosa</div><div class="card-meta"><span class="lever-badge lever-loss">Loss Aversion</span></div></div></div>
+        <div class="ad-card" onclick="openModal('A2_IdentityBinary')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">⚖️<span>Identity</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A2 · Identity Binary</div><div class="card-meta"><span class="lever-badge lever-identity">Identity</span></div></div></div>
+        <div class="ad-card" onclick="openModal('A3_CostoOportunidad')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">💵<span>$8.280</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A3 · Costo de Oportunidad</div><div class="card-meta"><span class="lever-badge lever-loss">Mental Accounting</span></div></div></div>
+        <div class="ad-card" onclick="openModal('A4_Inevitabilidad')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">🔮<span>Inevitable</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A4 · Inevitabilidad</div><div class="card-meta"><span class="lever-badge lever-fomo">FOMO</span></div></div></div>
+        <div class="ad-card" onclick="openModal('A5_VelocidadAsimetrica')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">⚡<span>8hs vs 20min</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A5 · Velocidad Asimétrica</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span></div></div></div>
+        <div class="ad-card" onclick="openModal('A6_DeudaActiva')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">💳<span>Deuda</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A6 · Deuda Activa</div><div class="card-meta"><span class="lever-badge lever-loss">Prospect Theory</span></div></div></div>
+        <div class="ad-card" onclick="openModal('A7_RedefineVentaja')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">🏆<span>Reglas</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A7 · Redefine Ventaja</div><div class="card-meta"><span class="lever-badge lever-authority">Anchoring</span></div></div></div>
+        <div class="ad-card" onclick="openModal('A8_UnityExclusividad')"><div class="thumb" style="aspect-ratio:4/5"><div class="placeholder">🤝<span>Grupo</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">A8 · Unity + Exclusividad</div><div class="card-meta"><span class="lever-badge lever-mimetic">Unity</span></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARRUSELES -->
+  <div class="section" id="tab-carruseles">
+    <div class="section-block">
+      <div class="section-title">Carrusel A — "Las dos empresas" · 6 slides</div>
+      <div class="cards-grid-4">
+        <div class="ad-card" onclick="openModal('F1_LasDosEmpresas_Hook')"><div class="thumb"><div class="placeholder">🎣<span>Hook</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">F1 · Hook</div><div class="card-meta"><span class="lever-badge lever-identity">Identity</span><span class="format-badge">1:1 · 01/06</span></div></div></div>
+        <div class="ad-card" onclick="openModal('F2_LasDosEmpresas_Dolor')"><div class="thumb"><div class="placeholder">⚡<span>Contraste</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">F2 · Contraste 50→2000</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">1:1 · 02/06</span></div></div></div>
+        <div class="ad-card" onclick="openModal('F3_LasDosEmpresas_Enemigo')"><div class="thumb"><div class="placeholder">🏃<span>Enemigo</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">F3 · El Enemigo</div><div class="card-meta"><span class="lever-badge lever-mimetic">Mimetic</span><span class="format-badge">1:1 · 03/06</span></div></div></div>
+        <div class="ad-card" onclick="openModal('F4_LasDosEmpresas_Vision')"><div class="thumb"><div class="placeholder">✅<span>Visión</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">F4 · La Visión</div><div class="card-meta"><span class="lever-badge lever-fomo">Future Pacing</span><span class="format-badge">1:1 · 04/06</span></div></div></div>
+        <div class="ad-card" onclick="openModal('F5_LasDosEmpresas_Prueba')"><div class="thumb"><div class="placeholder">📊<span>Datos</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">F5 · Prueba / Datos</div><div class="card-meta"><span class="lever-badge lever-authority">Authority</span><span class="format-badge">1:1 · 05/06</span></div></div></div>
+        <div class="ad-card" onclick="openModal('F6_LasDosEmpresas_CTA')"><div class="thumb"><div class="placeholder">🎯<span>CTA</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">F6 · CTA</div><div class="card-meta"><span class="lever-badge lever-zeigarnik">Zeigarnik</span><span class="format-badge">1:1 · 06/06</span></div></div></div>
+      </div>
+    </div>
+    <div class="section-block">
+      <div class="section-title">Carrusel B — "Costo de no hacer nada" · 6 slides</div>
+      <div class="cards-grid-4">
+        <div class="ad-card" onclick="openModal('G1_CostoNoHacer_Hook')"><div class="thumb"><div class="placeholder">🎣<span>Hook</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">G1 · Hook</div><div class="card-meta"><span class="lever-badge lever-loss">Loss</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('G2_CostoNoHacer_Calculadora')"><div class="thumb"><div class="placeholder">🧮<span>Calculá</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">G2 · Calculá el Costo</div><div class="card-meta"><span class="lever-badge lever-loss">Mental Acc.</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('G3_CostoNoHacer_Timeline')"><div class="thumb"><div class="placeholder">📅<span>Timeline</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">G3 · Timeline Arrepentimiento</div><div class="card-meta"><span class="lever-badge lever-fomo">FOMO</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('G4_CostoNoHacer_Reframe')"><div class="thumb"><div class="placeholder">🔄<span>Reframe</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">G4 · Reframe · Deuda</div><div class="card-meta"><span class="lever-badge lever-loss">Prospect Th.</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('G5_CostoNoHacer_Solucion')"><div class="thumb"><div class="placeholder">✅<span>Solución</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">G5 · La Solución</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('G6_CostoNoHacer_CTA')"><div class="thumb"><div class="placeholder">🎯<span>CTA</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">G6 · CTA</div><div class="card-meta"><span class="lever-badge lever-zeigarnik">Zeigarnik</span><span class="format-badge">1:1</span></div></div></div>
+      </div>
+    </div>
+    <div class="section-block">
+      <div class="section-title">Carrusel C — "Qué hace MAX" · 5 slides</div>
+      <div class="cards-grid-4">
+        <div class="ad-card" onclick="openModal('H1_QueHaceMAX_Hook')"><div class="thumb"><div class="placeholder">🤖<span>Hook</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">H1 · No es un chatbot más</div><div class="card-meta"><span class="lever-badge lever-contrast">Reframe</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('H2_QueHaceMAX_Consultas')"><div class="thumb"><div class="placeholder">💬<span>Chat</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">H2 · Responde Consultas</div><div class="card-meta"><span class="lever-badge lever-authority">JTBD</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('H3_QueHaceMAX_Leads')"><div class="thumb"><div class="placeholder">🔄<span>Leads</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">H3 · Captura Leads</div><div class="card-meta"><span class="lever-badge lever-authority">JTBD</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('H4_QueHaceMAX_Reportes')"><div class="thumb"><div class="placeholder">📊<span>Dashboard</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">H4 · Reportes Automáticos</div><div class="card-meta"><span class="lever-badge lever-authority">JTBD</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('H5_QueHaceMAX_CTA')"><div class="thumb"><div class="placeholder">🎯<span>CTA</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">H5 · CTA</div><div class="card-meta"><span class="lever-badge lever-fomo">BJ Fogg</span><span class="format-badge">1:1</span></div></div></div>
+      </div>
+    </div>
+    <div class="section-block">
+      <div class="section-title">Carrusel D — "MAX vs. Contratar" · 5 slides</div>
+      <div class="cards-grid-4">
+        <div class="ad-card" onclick="openModal('I1_MaxVsContratar_Hook')"><div class="thumb"><div class="placeholder">🎣<span>Hook</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">I1 · Hook</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('I2_MaxVsContratar_Opcion1')"><div class="thumb"><div class="placeholder">👔<span>Contratar</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">I2 · Opción A: Contratar</div><div class="card-meta"><span class="lever-badge lever-loss">Anchoring</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('I3_MaxVsContratar_Opcion2')"><div class="thumb"><div class="placeholder">🤖<span>MAX</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">I3 · Opción B: MAX</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('I4_MaxVsContratar_Tabla')"><div class="thumb"><div class="placeholder">📊<span>Tabla</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">I4 · Comparación Directa</div><div class="card-meta"><span class="lever-badge lever-contrast">Contrast</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('I5_MaxVsContratar_CTA')"><div class="thumb"><div class="placeholder">🎯<span>CTA</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">I5 · CTA</div><div class="card-meta"><span class="lever-badge lever-fomo">BJ Fogg</span><span class="format-badge">1:1</span></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAID ADS -->
+  <div class="section" id="tab-paid">
+    <div class="section-block">
+      <div class="section-title">Paid Ads — Máxima conversión · BJ Fogg completo</div>
+      <div class="cards-grid-4">
+        <div class="ad-card" onclick="openModal('J1_PaidAd_HorasPierde')"><div class="thumb"><div class="placeholder">⏱️<span>Paid</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">J1 · Horas que pierde tu empresa</div><div class="card-meta"><span class="lever-badge lever-loss">Loss Aversion</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('J2_PaidAd_127Horas')"><div class="thumb"><div class="placeholder">💯<span>127h</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">J2 · 127 Horas Ahorradas</div><div class="card-meta"><span class="lever-badge lever-authority">Anchoring</span><span class="format-badge">1:1</span></div></div></div>
+        <div class="ad-card" onclick="openModal('J3_PaidAd_DosEmpresas')"><div class="thumb"><div class="placeholder">⚖️<span>Binary</span></div></div><div class="status-dot status-pending"></div><div class="card-info"><div class="card-name">J3 · Dos Tipos de Empresas</div><div class="card-meta"><span class="lever-badge lever-identity">Identity</span><span class="format-badge">1:1</span></div></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPORT -->
+  <div class="section" id="tab-export">
+    <div class="section-block">
+      <div class="section-title">Exportar Stills — frame 90 de cada composición</div>
+      <p style="color:var(--gray);margin-bottom:20px;font-size:14px;line-height:1.7;">
+        Ejecutar desde el directorio <code style="color:var(--cyan)">max-content/</code>. Cada comando exporta el frame 90 (estado final) como PNG de alta calidad.
+      </p>
+      <p style="color:var(--violet);font-size:13px;font-weight:600;margin-bottom:12px;">Exportar todo de una vez:</p>
+      <div class="export-cmd" id="export-all">npx remotion still --bundle-cache=true [ID] --frame=90 output/[ID].png</div>
+      <p style="color:var(--muted);font-size:12px;margin-top:8px;margin-bottom:24px;">Reemplazá [ID] con el nombre de composición deseado.</p>
+
+      <p style="color:var(--violet);font-size:13px;font-weight:600;margin-bottom:12px;">Script bash para exportar todos:</p>
+      <div class="export-cmd" style="white-space:pre;overflow-x:auto;line-height:1.6;">#!/bin/bash
+IDS=(
+  A1_AmenazaSilenciosa A2_IdentityBinary A3_CostoOportunidad A4_Inevitabilidad
+  A5_VelocidadAsimetrica A6_DeudaActiva A7_RedefineVentaja A8_UnityExclusividad
+  B1_CostoInvisible1 B2_MientrasDormias1 B3_MaxAccionHoteleria B4_ElDato68
+  B5_OpinionChatbots B6_CulturaAspiracional1
+  C1_ErroresManuales C2_FinDeSemana C3_ReportesAutomaticos C4_McKinsey34
+  C5_EmpresasEstablecidas C6_MaxNocturna
+  D1_RotacionLaboral D2_TemporadaAlta D3_LeadNurturing D4_NueveX
+  D5_EsperarElMomento D6_Uruguay
+  E1_2025Tarde E2_ContrasteMaximo E3_ElNumeroReal E4_DecisionMasCara
+  E5_DecisionFinal E6_ElFuturo
+  F1_LasDosEmpresas_Hook F2_LasDosEmpresas_Dolor F3_LasDosEmpresas_Enemigo
+  F4_LasDosEmpresas_Vision F5_LasDosEmpresas_Prueba F6_LasDosEmpresas_CTA
+  G1_CostoNoHacer_Hook G2_CostoNoHacer_Calculadora G3_CostoNoHacer_Timeline
+  G4_CostoNoHacer_Reframe G5_CostoNoHacer_Solucion G6_CostoNoHacer_CTA
+  H1_QueHaceMAX_Hook H2_QueHaceMAX_Consultas H3_QueHaceMAX_Leads
+  H4_QueHaceMAX_Reportes H5_QueHaceMAX_CTA
+  I1_MaxVsContratar_Hook I2_MaxVsContratar_Opcion1 I3_MaxVsContratar_Opcion2
+  I4_MaxVsContratar_Tabla I5_MaxVsContratar_CTA
+  J1_PaidAd_HorasPierde J2_PaidAd_127Horas J3_PaidAd_DosEmpresas
+)
+mkdir -p output
+for ID in "${IDS[@]}"; do
+  echo "Exporting $ID..."
+  npx remotion still "$ID" --frame=90 "output/$ID.png"
+done
+echo "Done! ${#IDS[@]} compositions exported."</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal" style="position:relative">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div class="modal-img">
+      <div id="modal-img-content" class="no-preview">🎬<span>Preview no disponible</span><span style="font-size:11px">Exportar con: npx remotion still [ID] --frame=90 output/[ID].png</span></div>
+    </div>
+    <div class="modal-info">
+      <div>
+        <div class="modal-title" id="modal-title">—</div>
+        <div class="modal-id" id="modal-id">—</div>
+      </div>
+      <div class="modal-badges" id="modal-badges"></div>
+      <div class="modal-copy">
+        <div class="copy-label">Comando de exportación</div>
+        <div class="export-cmd" id="modal-export-cmd">—</div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary" onclick="copyExportCmd()">Copiar comando</button>
+        <button class="btn btn-secondary" onclick="closeModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const COMPOSITIONS = {
+  A1_AmenazaSilenciosa: { name: 'A1 · Amenaza Silenciosa', levers: ['loss','fomo'], format:'4:5', block:'Copy Atoms' },
+  A2_IdentityBinary: { name: 'A2 · Identity Binary', levers: ['identity'], format:'4:5', block:'Copy Atoms' },
+  A3_CostoOportunidad: { name: 'A3 · Costo de Oportunidad', levers: ['loss','authority'], format:'4:5', block:'Copy Atoms' },
+  A4_Inevitabilidad: { name: 'A4 · Inevitabilidad', levers: ['fomo','identity'], format:'4:5', block:'Copy Atoms' },
+  A5_VelocidadAsimetrica: { name: 'A5 · Velocidad Asimétrica', levers: ['contrast'], format:'4:5', block:'Copy Atoms' },
+  A6_DeudaActiva: { name: 'A6 · Deuda Activa', levers: ['loss'], format:'4:5', block:'Copy Atoms' },
+  A7_RedefineVentaja: { name: 'A7 · Redefine Ventaja', levers: ['authority','contrast'], format:'4:5', block:'Copy Atoms' },
+  A8_UnityExclusividad: { name: 'A8 · Unity + Exclusividad', levers: ['mimetic','identity'], format:'4:5', block:'Copy Atoms' },
+  B1_CostoInvisible1: { name: 'B1 · Costo Invisible #1', levers: ['loss','authority'], format:'4:5', block:'Semana 1' },
+  B2_MientrasDormias1: { name: 'B2 · Mientras Dormías #1', levers: ['fomo','zeigarnik'], format:'4:5', block:'Semana 1' },
+  B3_MaxAccionHoteleria: { name: 'B3 · MAX en Acción · Hotelería', levers: ['contrast','authority'], format:'4:5', block:'Semana 1' },
+  B4_ElDato68: { name: 'B4 · El Dato · 68%', levers: ['authority'], format:'4:5', block:'Semana 1' },
+  B5_OpinionChatbots: { name: 'B5 · Opinión · Los Chatbots', levers: ['contrast'], format:'4:5', block:'Semana 1' },
+  B6_CulturaAspiracional1: { name: 'B6 · Cultura MAX · Aspiracional', levers: ['mimetic'], format:'4:5', block:'Semana 1' },
+  C1_ErroresManuales: { name: 'C1 · Errores Manuales', levers: ['loss'], format:'4:5', block:'Semana 2' },
+  C2_FinDeSemana: { name: 'C2 · Fin de Semana', levers: ['contrast','fomo'], format:'4:5', block:'Semana 2' },
+  C3_ReportesAutomaticos: { name: 'C3 · Reportes Automáticos', levers: ['authority'], format:'4:5', block:'Semana 2' },
+  C4_McKinsey34: { name: 'C4 · McKinsey 34%', levers: ['authority'], format:'4:5', block:'Semana 2' },
+  C5_EmpresasEstablecidas: { name: 'C5 · Empresas Establecidas', levers: ['identity'], format:'4:5', block:'Semana 2' },
+  C6_MaxNocturna: { name: 'C6 · MAX Nocturna', levers: ['mimetic'], format:'4:5', block:'Semana 2' },
+  D1_RotacionLaboral: { name: 'D1 · Rotación Laboral', levers: ['loss'], format:'4:5', block:'Semana 3' },
+  D2_TemporadaAlta: { name: 'D2 · Temporada Alta', levers: ['contrast','authority'], format:'4:5', block:'Semana 3' },
+  D3_LeadNurturing: { name: 'D3 · Lead Nurturing · 5 días', levers: ['authority'], format:'4:5', block:'Semana 3' },
+  D4_NueveX: { name: 'D4 · El Dato · 9x', levers: ['authority'], format:'4:5', block:'Semana 3' },
+  D5_EsperarElMomento: { name: 'D5 · Esperar el Momento', levers: ['fomo'], format:'4:5', block:'Semana 3' },
+  D6_Uruguay: { name: 'D6 · Cultura · Uruguay', levers: ['mimetic','identity'], format:'4:5', block:'Semana 3' },
+  E1_2025Tarde: { name: 'E1 · ¿Cómo llegamos tan tarde?', levers: ['fomo','loss'], format:'4:5', block:'Semana 4' },
+  E2_ContrasteMaximo: { name: 'E2 · Contraste Máximo · 24/7', levers: ['contrast','identity'], format:'4:5', block:'Semana 4' },
+  E3_ElNumeroReal: { name: 'E3 · El Número Real', levers: ['mimetic','authority'], format:'4:5', block:'Semana 4' },
+  E4_DecisionMasCara: { name: 'E4 · La Decisión Más Cara', levers: ['loss'], format:'4:5', block:'Semana 4' },
+  E5_DecisionFinal: { name: 'E5 · Decisión Final · CTA', levers: ['authority'], format:'4:5', block:'Semana 4' },
+  E6_ElFuturo: { name: 'E6 · El Futuro · Times Square', levers: ['mimetic'], format:'4:5', block:'Semana 4' },
+  F1_LasDosEmpresas_Hook: { name: 'F1 · Las Dos Empresas · Hook', levers: ['identity'], format:'1:1', block:'Carrusel A' },
+  F2_LasDosEmpresas_Dolor: { name: 'F2 · Contraste 50→2000', levers: ['contrast'], format:'1:1', block:'Carrusel A' },
+  F3_LasDosEmpresas_Enemigo: { name: 'F3 · El Enemigo', levers: ['mimetic'], format:'1:1', block:'Carrusel A' },
+  F4_LasDosEmpresas_Vision: { name: 'F4 · La Visión', levers: ['fomo'], format:'1:1', block:'Carrusel A' },
+  F5_LasDosEmpresas_Prueba: { name: 'F5 · Prueba / Datos', levers: ['authority'], format:'1:1', block:'Carrusel A' },
+  F6_LasDosEmpresas_CTA: { name: 'F6 · CTA', levers: ['zeigarnik'], format:'1:1', block:'Carrusel A' },
+  G1_CostoNoHacer_Hook: { name: 'G1 · Costo de No Hacer · Hook', levers: ['loss'], format:'1:1', block:'Carrusel B' },
+  G2_CostoNoHacer_Calculadora: { name: 'G2 · Calculá el Costo', levers: ['loss'], format:'1:1', block:'Carrusel B' },
+  G3_CostoNoHacer_Timeline: { name: 'G3 · Timeline Arrepentimiento', levers: ['fomo'], format:'1:1', block:'Carrusel B' },
+  G4_CostoNoHacer_Reframe: { name: 'G4 · Reframe · Deuda', levers: ['loss'], format:'1:1', block:'Carrusel B' },
+  G5_CostoNoHacer_Solucion: { name: 'G5 · La Solución', levers: ['contrast'], format:'1:1', block:'Carrusel B' },
+  G6_CostoNoHacer_CTA: { name: 'G6 · CTA', levers: ['zeigarnik'], format:'1:1', block:'Carrusel B' },
+  H1_QueHaceMAX_Hook: { name: 'H1 · Qué Hace MAX · Hook', levers: ['contrast'], format:'1:1', block:'Carrusel C' },
+  H2_QueHaceMAX_Consultas: { name: 'H2 · Responde Consultas', levers: ['authority'], format:'1:1', block:'Carrusel C' },
+  H3_QueHaceMAX_Leads: { name: 'H3 · Captura Leads', levers: ['authority'], format:'1:1', block:'Carrusel C' },
+  H4_QueHaceMAX_Reportes: { name: 'H4 · Reportes Automáticos', levers: ['authority'], format:'1:1', block:'Carrusel C' },
+  H5_QueHaceMAX_CTA: { name: 'H5 · CTA', levers: ['fomo'], format:'1:1', block:'Carrusel C' },
+  I1_MaxVsContratar_Hook: { name: 'I1 · MAX vs Contratar · Hook', levers: ['contrast'], format:'1:1', block:'Carrusel D' },
+  I2_MaxVsContratar_Opcion1: { name: 'I2 · Opción A: Contratar', levers: ['loss'], format:'1:1', block:'Carrusel D' },
+  I3_MaxVsContratar_Opcion2: { name: 'I3 · Opción B: MAX', levers: ['contrast'], format:'1:1', block:'Carrusel D' },
+  I4_MaxVsContratar_Tabla: { name: 'I4 · Comparación Directa', levers: ['contrast'], format:'1:1', block:'Carrusel D' },
+  I5_MaxVsContratar_CTA: { name: 'I5 · CTA', levers: ['fomo'], format:'1:1', block:'Carrusel D' },
+  J1_PaidAd_HorasPierde: { name: 'J1 · Paid · Horas Pierde', levers: ['loss'], format:'1:1', block:'Paid Ads' },
+  J2_PaidAd_127Horas: { name: 'J2 · Paid · 127 Horas', levers: ['authority'], format:'1:1', block:'Paid Ads' },
+  J3_PaidAd_DosEmpresas: { name: 'J3 · Paid · Dos Empresas', levers: ['identity'], format:'1:1', block:'Paid Ads' },
+};
+
+const LEVER_LABELS = { loss:'Loss Aversion', identity:'Identity Binary', fomo:'FOMO/Present', mimetic:'Mimetic Desire', contrast:'Contrast Effect', authority:'Authority', zeigarnik:'Zeigarnik' };
+const LEVER_CLASSES = { loss:'lever-loss', identity:'lever-identity', fomo:'lever-fomo', mimetic:'lever-mimetic', contrast:'lever-contrast', authority:'lever-authority', zeigarnik:'lever-zeigarnik' };
+
+function showTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function openModal(id) {
+  const comp = COMPOSITIONS[id];
+  if (!comp) return;
+  document.getElementById('modal-title').textContent = comp.name;
+  document.getElementById('modal-id').textContent = id;
+  const cmd = `npx remotion still ${id} --frame=90 output/${id}.png`;
+  document.getElementById('modal-export-cmd').textContent = cmd;
+  const badges = document.getElementById('modal-badges');
+  badges.innerHTML = comp.levers.map(l => `<span class="lever-badge ${LEVER_CLASSES[l]}">${LEVER_LABELS[l]}</span>`).join('') + `<span class="format-badge">${comp.format} · ${comp.block}</span>`;
+  const imgContent = document.getElementById('modal-img-content');
+  const imgPath = `../output/${id}.png`;
+  const img = new Image();
+  img.onload = () => { imgContent.innerHTML = ''; imgContent.appendChild(img); img.style.cssText='width:100%;height:100%;object-fit:contain;'; };
+  img.onerror = () => { imgContent.className = 'no-preview'; imgContent.innerHTML = '🎬<span>Preview no generado</span><span style="font-size:11px">Ejecutá el comando de exportación</span>'; };
+  imgContent.className = '';
+  img.src = imgPath;
+  document.getElementById('modal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+function closeModalOutside(e) { if (e.target.id === 'modal') closeModal(); }
+
+function copyExportCmd() {
+  const cmd = document.getElementById('modal-export-cmd').textContent;
+  navigator.clipboard.writeText(cmd).then(() => {
+    const btn = event.target;
+    const orig = btn.textContent;
+    btn.textContent = '✓ Copiado';
+    setTimeout(() => btn.textContent = orig, 1500);
+  });
+}
+
+// Check for exported files
+async function checkExports() {
+  let done = 0;
+  const cards = document.querySelectorAll('.ad-card');
+  for (const card of cards) {
+    const onclick = card.getAttribute('onclick');
+    if (!onclick) continue;
+    const match = onclick.match(/openModal\('([^']+)'\)/);
+    if (!match) continue;
+    const id = match[1];
+    try {
+      const r = await fetch(`../output/${id}.png`, { method: 'HEAD' });
+      if (r.ok) {
+        const dot = card.querySelector('.status-dot');
+        if (dot) { dot.className = 'status-dot status-done'; }
+        done++;
+      }
+    } catch(e) {}
+  }
+  document.getElementById('done-count').textContent = done;
+}
+
+checkExports();
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
