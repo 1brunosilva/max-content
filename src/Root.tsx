@@ -12,6 +12,7 @@ import { AppleAd, APPLEAD_DURATION } from './apple/AppleAd';
 import { CardWheel, CARDWHEEL_DURATION } from './apple/CardWheel';
 import { StackFan, STACKFAN_DURATION } from './apple/StackFan';
 import { Conveyor, CONVEYOR_DURATION } from './apple/Conveyor';
+import { SilentChurn, SILENTCHURN_DURATION } from './apple/SilentChurn';
 
 /**
  * Root del sistema de video "Glassy Motion". Ver max-content/VIDEO-SYSTEM.md.
@@ -49,6 +50,9 @@ export const RemotionRoot: React.FC = () => {
 
       {/* Conveyor — mecanismo #3: fila que pasa (cover-flow) → frena con glow → payoff. */}
       <Composition id="Conveyor" component={Conveyor} durationInFrames={CONVEYOR_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SilentChurn — mecanismo #4: lista de clientes, uno se va en silencio → realización. */}
+      <Composition id="SilentChurn" component={SilentChurn} durationInFrames={SILENTCHURN_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
     </>
   );
 };
