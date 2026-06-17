@@ -38,6 +38,18 @@ import { NumeroMagico, NUMEROMAGICO_DURATION } from './apple/NumeroMagico';
 import { TextoVsImagen, TEXTOVSIMAGEN_DURATION } from './apple/TextoVsImagen';
 import { LoUrgente, LOURGENTE_DURATION } from './apple/LoUrgente';
 import { HaloEffect, HALOEFFECT_DURATION } from './apple/HaloEffect';
+import { RecallTest, RECALLTEST_DURATION } from './apple/RecallTest';
+import { TypeScan, TYPESCAN_DURATION } from './apple/TypeScan';
+import { ForgetCurve, FORGETCURVE_DURATION } from './apple/ForgetCurve';
+import { NarrativaVs, NARRATIVAVS_DURATION } from './apple/NarrativaVs';
+import { FOMONotif, FOMOMNOTIF_DURATION } from './apple/FOMONotif';
+import { PeakEnd, PEAKEND_DURATION } from './apple/PeakEnd';
+import { NombrePropio, NOMBREPROPIO_DURATION } from './apple/NombrePropio';
+import { GestaltClose, GESTALTCLOSE_DURATION } from './apple/GestaltClose';
+import { ConfirmaBias, CONFIRMABIAS_DURATION } from './apple/ConfirmaBias';
+import { Compromiso, COMPROMISO_DURATION } from './apple/Compromiso';
+import { OrbitaTrust, ORBITATRUST_DURATION } from './apple/OrbitaTrust';
+import { PrecioMental, PRECIOMENTAL_DURATION } from './apple/PrecioMental';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -154,6 +166,42 @@ export const RemotionRoot: React.FC = () => {
 
       {/* HaloEffect — mecanismo #29: Efecto halo. Zoom en un detalle imperfecto "mancha" la percepción de toda la marca. Rosa. C. */}
       <Composition id="HaloEffect" component={HaloEffect} durationInFrames={HALOEFFECT_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* RecallTest — mecanismo #30: Primacía/recencia. 7 cards, se apagan, solo primera y última brillan. Cyan. C. */}
+      <Composition id="RecallTest" component={RecallTest} durationInFrames={RECALLTEST_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* TypeScan — mecanismo #31: Atención/escaneo. Landing page + scanner barre → solo 2 palabras quedan iluminadas. Violeta. C. */}
+      <Composition id="TypeScan" component={TypeScan} durationInFrames={TYPESCAN_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* ForgetCurve — mecanismo #32: Curva del olvido. Card de mensaje se desvanece con marcadores de tiempo. Cyan-azul. C. */}
+      <Composition id="ForgetCurve" component={ForgetCurve} durationInFrames={FORGETCURVE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* NarrativaVs — mecanismo #33: Narrativa vs argumento. Historia vs lista lógica, la historia gana. Dorado. C. */}
+      <Composition id="NarrativaVs" component={NarrativaVs} durationInFrames={NARRATIVAVS_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* FOMONotif — mecanismo #34: FOMO. Notificaciones de negocios activos apilándose, tu card apagada. Ámbar. V. */}
+      <Composition id="FOMONotif" component={FOMONotif} durationInFrames={FOMOMNOTIF_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PeakEnd — mecanismo #35: Peak-End rule. Timeline de experiencia del cliente, pico y final iluminados. Rosa-cyan. C. */}
+      <Composition id="PeakEnd" component={PeakEnd} durationInFrames={PEAKEND_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* NombrePropio — mecanismo #36: Efecto nombre propio. Feed genérico gris, un mensaje con el nombre glow. Cyan. C. */}
+      <Composition id="NombrePropio" component={NombrePropio} durationInFrames={NOMBREPROPIO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* GestaltClose — mecanismo #37: Gestalt/cierre. Arco incompleto, la mente lo completa con glow. Rosa. C. */}
+      <Composition id="GestaltClose" component={GestaltClose} durationInFrames={GESTALTCLOSE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* ConfirmaBias — mecanismo #38: Sesgo de confirmación. Dos feeds; cursor instintivo elige el que confirma. Violeta. C. */}
+      <Composition id="ConfirmaBias" component={ConfirmaBias} durationInFrames={CONFIRMABIAS_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Compromiso — mecanismo #39: Compromiso/consistencia. Checkboxes en cascade: sí pequeño → sí grande. Violeta. V. */}
+      <Composition id="Compromiso" component={Compromiso} durationInFrames={COMPROMISO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* OrbitaTrust — mecanismo #40: Autoridad por asociación. Sellos/logos orbitan tu marca y transfieren credibilidad. Dorado. C. */}
+      <Composition id="OrbitaTrust" component={OrbitaTrust} durationInFrames={ORBITATRUST_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PrecioMental — mecanismo #41: Contabilidad mental. El mismo $5.000 enmarcado de 3 formas distintas. Verde. C. */}
+      <Composition id="PrecioMental" component={PrecioMental} durationInFrames={PRECIOMENTAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
