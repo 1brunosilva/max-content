@@ -9,12 +9,28 @@
  */
 import React from 'react';
 import { AbsoluteFill, useCurrentFrame } from 'remotion';
-import { Stage, Glass, SiriGlow, SiriFrame, BigType, ip, APPLE, verbs, fonts, VLT_L } from './kit';
+import { Stage, Glass, SiriGlow, SiriFrame, BigType, ip, APPLE, fonts, VLT_L } from './kit';
 
 // el feed: promos genéricas, todas iguales (ese es el punto)
 const FEED = ['−20% OFF', 'NUEVO INGRESO', 'OFERTA', '2x1', 'LIQUIDACIÓN', 'PROMO', 'ENVÍO GRATIS', 'ÚLTIMO DÍA', 'DESCUENTO'];
 const STOP = FEED.length - 1; // frena en la última
 const CW = 470, CH = 300;
+
+// Cover-flow propio (NO el verbo compartido): las cards NO se pisan. Clave =
+// (1) un GAP que aísla la card central + (2) rotación/profundidad que SATURAN
+// rápido en las laterales (se giran fuerte y se hunden en Z, despegándose).
+const SPREAD = 360; // separación base por índice
+const GAPC = 150;   // gap extra que aísla la central de sus vecinas
+const ROTY = 56;    // rotación de las laterales (saturada en |off|>=1)
+const DEPTH = 300;  // cuánto se hunden en Z las laterales
+const cflow = (o: number) => {
+  const s = Math.sign(o);
+  const m = Math.min(Math.abs(o), 1);                 // 0..1: transición desde el centro
+  const x = o * SPREAD + s * m * GAPC;                // empuje + gap (aísla la central)
+  const rotY = -s * m * ROTY;                          // gira fuerte apenas se aleja del centro
+  const z = -Math.min(Math.abs(o), 2.4) * DEPTH;       // se hunde en profundidad
+  return `translateX(${x}px) translateZ(${z}px) rotateY(${rotY}deg)`;
+};
 
 export const CONVEYOR_DURATION = 240;
 
@@ -49,7 +65,7 @@ export const Conveyor: React.FC = () => {
             const op = (isStop ? lockedFade : (1 - Math.min(Math.abs(off) * 0.26, 0.74)) * rowFade);
             if (op <= 0.01) return null;
             return (
-              <div key={i} style={{ position: 'absolute', left: -CW / 2, top: -CH / 2, width: CW, height: CH, transform: verbs.coverflow(off, 1, 300, 260, 44), transformOrigin: 'center', opacity: op, zIndex: 50 - Math.round(Math.abs(off)) }}>
+              <div key={i} style={{ position: 'absolute', left: -CW / 2, top: -CH / 2, width: CW, height: CH, transform: cflow(off), transformOrigin: 'center', opacity: op, zIndex: 1000 - Math.round(Math.abs(off) * 100) }}>
                 {isStop ? <SiriGlow frame={f} intensity={glow * lockedFade} radius={34} /> : null}
                 <Glass w={CW} h={CH} selected={isStop && locked > 0.05} pad={38} style={{ justifyContent: 'space-between' }}>
                   <div style={{ fontFamily: fonts.mono, fontSize: 17, letterSpacing: '0.08em', color: '#8A8AA0' }}>SPONSORED</div>
