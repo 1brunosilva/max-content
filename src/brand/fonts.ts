@@ -1,18 +1,13 @@
 /**
- * Carga de fuentes del motor continuo. Inter (display, look Apple/Linear) +
- * DM Mono (labels/metadata). Se cargan una vez; las familias se exponen para
- * que las scenes las usen vía brand.font.
+ * Fuentes sin carga de red — compatibles con entornos offline/corporativos.
+ * Usa system-ui (SF Pro/Segoe UI) + monospace del sistema.
+ * Las fuentes Google se cargan en dev desde el browser; en render sin red
+ * usamos system fallbacks de alta calidad.
  */
-import { loadFont as loadInter } from '@remotion/google-fonts/Inter';
-import { loadFont as loadDMMono } from '@remotion/google-fonts/DMMono';
 
-export const { fontFamily: inter } = loadInter();
-export const { fontFamily: dmMono } = loadDMMono();
+export const fontDisplay = 'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif';
+export const fontMono = 'ui-monospace, SFMono-Regular, "Cascadia Code", Consolas, "DejaVu Sans Mono", monospace';
 
-/**
- * Familias LISTAS para usar como `fontFamily`, con fallback explícito (nunca serif).
- * Las marcas las consumen como valor → fuerza la evaluación de este módulo (carga
- * real de la fuente) y evita que el bundler lo tree-shakee.
- */
-export const fontDisplay = `${inter}, system-ui, sans-serif`;
-export const fontMono = `${dmMono}, ui-monospace, monospace`;
+// Aliases de compatibilidad
+export const inter = fontDisplay;
+export const dmMono = fontMono;

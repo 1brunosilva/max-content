@@ -28,6 +28,16 @@ import { PrimerSegundo, PRIMERSEGUNDO_DURATION } from './apple/PrimerSegundo';
 import { Contraste, CONTRASTE_DURATION } from './apple/Contraste';
 import { EsperaQueDuele, ESPERAQUEDUELE_DURATION } from './apple/EsperaQueDuele';
 import { BlurReveal, BLURREVEAL_DURATION } from './apple/BlurReveal';
+import { PrecioCero, PRECIOCERO_DURATION } from './apple/PrecioCero';
+import { Decoy, DECOY_DURATION } from './apple/Decoy';
+import { EfectoIKEA, EFECTOIKEA_DURATION } from './apple/EfectoIKEA';
+import { Escasez, ESCASEZ_DURATION } from './apple/Escasez';
+import { Reciprocidad, RECIPROCIDAD_DURATION } from './apple/Reciprocidad';
+import { DobleCosto, DOBLECOSTO_DURATION } from './apple/DobleCosto';
+import { NumeroMagico, NUMEROMAGICO_DURATION } from './apple/NumeroMagico';
+import { TextoVsImagen, TEXTOVSIMAGEN_DURATION } from './apple/TextoVsImagen';
+import { LoUrgente, LOURGENTE_DURATION } from './apple/LoUrgente';
+import { HaloEffect, HALOEFFECT_DURATION } from './apple/HaloEffect';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -114,6 +124,36 @@ export const RemotionRoot: React.FC = () => {
 
       {/* BlurReveal — mecanismo #19: Context-dependent Mere Exposure. Tu marca borrosa vs competidor nítido → el espectador elige al nítido. Dorado/rosa. */}
       <Composition id="BlurReveal" component={BlurReveal} durationInFrames={BLURREVEAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PrecioCero — mecanismo #20: Efecto precio-cero. Card FREE pulsa con glow → el espectador elige gratis aunque sea peor. Verde. C. */}
+      <Composition id="PrecioCero" component={PrecioCero} durationInFrames={PRECIOCERO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Decoy — mecanismo #21: Efecto señuelo. 3 planes; el señuelo hace que Pro sea la elección obvia. Violeta. C. */}
+      <Composition id="Decoy" component={Decoy} durationInFrames={DECOY_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EfectoIKEA — mecanismo #22: Efecto IKEA. Dashboard se arma pieza a pieza; el espectador lo valora más por haberlo "construido". Cyan. C. */}
+      <Composition id="EfectoIKEA" component={EfectoIKEA} durationInFrames={EFECTOIKEA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Escasez — mecanismo #23: Escasez/urgencia real. 5 plazas se apagan de a una; quedan 2 pulsando con glow. Ámbar. V. */}
+      <Composition id="Escasez" component={Escasez} durationInFrames={ESCASEZ_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Reciprocidad — mecanismo #24: Principio de reciprocidad. Gift card cae con glow → el espectador siente que debe algo. Rosa-verde. C. */}
+      <Composition id="Reciprocidad" component={Reciprocidad} durationInFrames={RECIPROCIDAD_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* DobleCosto — mecanismo #25: Costo de oportunidad. 6 meses con barras que suman el costo invisible de no automatizar. Ámbar. V. */}
+      <Composition id="DobleCosto" component={DobleCosto} durationInFrames={DOBLECOSTO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* NumeroMagico — mecanismo #26: Anclaje numérico. Valor $24.900 ancla → precio $4.900 parece ganga. Violeta. C. */}
+      <Composition id="NumeroMagico" component={NumeroMagico} durationInFrames={NUMEROMAGICO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* TextoVsImagen — mecanismo #27: Superioridad de imagen. Card texto se borra de la memoria; card imagen permanece con glow. Dorado. C. */}
+      <Composition id="TextoVsImagen" component={TextoVsImagen} durationInFrames={TEXTOVSIMAGEN_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* LoUrgente — mecanismo #28: Sesgo de urgencia. Conveyor de tareas urgentes; card IMPORTANTE cae y se pierde. Ámbar. C. */}
+      <Composition id="LoUrgente" component={LoUrgente} durationInFrames={LOURGENTE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* HaloEffect — mecanismo #29: Efecto halo. Zoom en un detalle imperfecto "mancha" la percepción de toda la marca. Rosa. C. */}
+      <Composition id="HaloEffect" component={HaloEffect} durationInFrames={HALOEFFECT_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
