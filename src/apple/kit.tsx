@@ -64,6 +64,22 @@ export const Drift: React.FC<{ amp?: number; children: React.ReactNode }> = ({ a
   return <div style={{ transform: `translateY(${Math.sin(f * 0.02) * amp}px)` }}>{children}</div>;
 };
 
+// ── ZONA SEGURA (1080×1920) ───────────────────────────────────────────────────
+// Márgenes donde la UI de TikTok/Reels/Shorts tapa contenido (caso más restrictivo
+// + margen). TODO texto/elemento clave va DENTRO de SAFE. Fuente: research/JUEGOS-MENTALES-RESEARCH.md.
+export const SAFE = { top: 220, bottom: 420, left: 90, right: 130 } as const;
+// Overlay GUÍA para preview/dev: muestra la zona segura mientras componés.
+// Poné <SafeArea show /> en el mecanismo para verla; sacalo (o show=false) antes del render final.
+export const SafeArea: React.FC<{ show?: boolean }> = ({ show = false }) => {
+  if (!show) return null;
+  return (
+    <AbsoluteFill style={{ pointerEvents: 'none', zIndex: 9999 }}>
+      <div style={{ position: 'absolute', top: SAFE.top, bottom: SAFE.bottom, left: SAFE.left, right: SAFE.right, border: '3px dashed rgba(79,224,255,0.9)', borderRadius: 8 }} />
+      <div style={{ position: 'absolute', top: SAFE.top + 8, left: SAFE.left + 8, fontFamily: fontMono, fontSize: 26, color: 'rgba(79,224,255,0.95)' }}>ZONA SEGURA</div>
+    </AbsoluteFill>
+  );
+};
+
 // ── FOCO (glow tipo Siri — FAVORITO de Bruno, usar PROMINENTE) ────────────────
 // Bruno: "el glow Siri me encanta, usalo bastante". Paleta viva (cyan→azul→violeta→
 // rosa) que fluye, anillo nítido + bloom amplio. Es la firma del estilo.

@@ -35,7 +35,24 @@ profundidad cinematográfica, movimiento controlado. La tecnología, integrada y
 ## ⏱️ LEGIBILIDAD Y TIEMPO DE LECTURA (regla de Bruno, obligatoria)
 - **Apenitas más lento, SIEMPRE (Bruno, regla firme):** errar del lado de que se entienda. Mejor un toque lento que apurado. Truco de implementación: **time-scale global** por composición — `const f = useCurrentFrame() / SLOW` con `SLOW≈1.15` y escalar `durationInFrames` por el mismo factor → todo ~15% más lento con un solo cambio.
 - **Dar tiempo a leer:** si hay texto, que se lea sin apuro. El **payoff/cierre SIEMPRE con buen hold (~3–3.5s visible)**. Regla práctica: poder leer la frase en voz alta ~2 veces antes del corte.
-- **Legibilidad para ICP adulto (no todos ven 20/20):** los labels/notas al pie (DM Mono, tipo "LO QUE ESCRIBISTE") **NO chicos** → mínimo ~30px en 1080px de ancho. Headlines grandes, buen contraste. Ante la duda, agrandá.
+
+### 🔠 LETRAS GRANDES — piso duro (regla de Bruno, ICP adulto 40–60 que ve poco)
+Pensá SIEMPRE en un adulto que ve mal. **Ante la duda, agrandá.** Pisos mínimos en canvas 1080×1920:
+| Rol | Mínimo | Recomendado |
+|-----|--------|-------------|
+| Labels / notas al pie (DM Mono) | **40px** | 44–52px |
+| Cuerpo / texto de card | **52px** | 56–72px |
+| Headline / payoff | **88px** | 96–120px |
+Nada de letra chica nunca. Buen contraste (texto claro sobre base oscura). Una idea por pantalla, no párrafos.
+
+### 🟩 ZONA SEGURA — nada clave fuera de acá (1080×1920)
+La plataforma tapa bordes con su UI (likes, comentarios, caption, botones, barra). Para que el mismo video sirva en TikTok + Reels + Shorts, **todo el texto/elemento clave va dentro de la zona segura** (tomamos el caso más restrictivo, Reels, con margen):
+- **TOP 220px · BOTTOM 420px · IZQUIERDA 90px · DERECHA 130px** (la derecha un poco más por el stack de íconos).
+- Área útil ≈ **x: 90–950, y: 220–1500**. El error más común: texto pegado al borde derecho o muy abajo → lo tapan.
+- Verificar con el helper **`SafeArea`** del kit (overlay visible solo en preview/dev). Fuente: `research/JUEGOS-MENTALES-RESEARCH.md`. ⚠️ los píxeles cambian si las apps actualizan su UI.
+
+### 🎬 LA ANIMACIÓN ES LA PROTAGONISTA (no el texto)
+Lo principal es el **movimiento/mecanismo**; el texto **acompaña y nombra**, no al revés. Si sacás la animación y el video sigue "entendiéndose" como una placa con texto → está mal: era una infografía, no un experimento. El espectador primero VIVE el efecto (animación), después lee el payoff.
 
 ## Tendencias 2026 a usar (verificado)
 - **Tipografía cinética** con variable fonts (peso/ancho que muta) — contraste de peso extremo.
@@ -62,4 +79,4 @@ profundidad cinematográfica, movimiento controlado. La tecnología, integrada y
 4. Render + **verificar leyendo frames** (nunca describir desde el código).
 5. (Próximo) voice over TTS + música.
 
-Fuente de verdad: este `STYLE-DNA.md` + `EMPEZAR-ACA-VIDEO.md`. ADN en código: `src/apple/kit.tsx`.
+Fuente de verdad: este `STYLE-DNA.md` + `EMPEZAR-ACA-VIDEO.md` + `EXPERIMENT-PLAYBOOK.md` (formato experimento + biblioteca de ideas). ADN en código: `src/apple/kit.tsx`.

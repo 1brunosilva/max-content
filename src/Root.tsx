@@ -20,6 +20,7 @@ import { TimeSlip, TIMESLIP_DURATION } from './apple/TimeSlip';
 import { MilCortes, MILCORTES_DURATION } from './apple/MilCortes';
 import { Pestanas, PESTANAS_DURATION } from './apple/Pestanas';
 import { Seguimiento, SEGUIMIENTO_DURATION } from './apple/Seguimiento';
+import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
  * Root del sistema de video "Glassy Motion". Ver max-content/VIDEO-SYSTEM.md.

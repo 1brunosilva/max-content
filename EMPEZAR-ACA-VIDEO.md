@@ -1,8 +1,16 @@
 # 🎬 EMPEZAR ACÁ — Sistema de video Concepto (handoff de sesión)
 
 > Si sos una sesión nueva de Claude y vas a hacer videos para Bruno: **leé este archivo
-> entero + `STYLE-DNA.md` ANTES de tocar nada.** Esto te pone al día con lo que se logró
-> en la sesión del 2026-06-16, que Bruno calificó de "brillante / 9-10". No empieces de cero.
+> entero + `STYLE-DNA.md` + `EXPERIMENT-PLAYBOOK.md` ANTES de tocar nada.** Esto te pone al día
+> con lo que se logró en la sesión del 2026-06-16, que Bruno calificó de "brillante / 9-10".
+> No empieces de cero.
+>
+> **REGLAS NUEVAS (17/6, leyes):** (1) el **formato por defecto es el EXPERIMENTO** que le pasa al
+> espectador (ver `EXPERIMENT-PLAYBOOK.md` — tiene la fórmula + 40 ideas listas). (2) Mix **~70%
+> contenido / 30% venta**. (3) **Letras grandes** (pisos en STYLE-DNA: labels ≥40px, cuerpo ≥52px,
+> payoff ≥88px). (4) Todo el texto clave dentro de la **zona segura** (TOP 220 / BOTTOM 420 / IZQ 90 /
+> DER 130 en 1080×1920; usar el helper `SafeArea` del kit). (5) **La animación es la protagonista**,
+> el texto acompaña.
 
 ## 0. Dónde estás y cómo arrancar
 - **Carpeta canónica (iCloud, respaldada):** `/Users/brune/Desktop/Escritorio - Bruno/ClaudeCode/max-content`. Trabajá SIEMPRE acá.
