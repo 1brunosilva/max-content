@@ -66,7 +66,7 @@ export const Drift: React.FC<{ amp?: number; children: React.ReactNode }> = ({ a
 
 // ── ZONA SEGURA (1080×1920) ───────────────────────────────────────────────────
 // Márgenes donde la UI de TikTok/Reels/Shorts tapa contenido (caso más restrictivo
-// + margen). TODO texto/elemento clave va DENTRO de SAFE. Fuente: research/JUEGOS-MENTALES-RESEARCH.md.
+// + margen). TODO texto/elemento clave va DENTRO de SAFE. Fuente: research/FORMATO-VERTICAL.md.
 export const SAFE = { top: 220, bottom: 420, left: 90, right: 130 } as const;
 // Overlay GUÍA para preview/dev: muestra la zona segura mientras componés.
 // Poné <SafeArea show /> en el mecanismo para verla; sacalo (o show=false) antes del render final.

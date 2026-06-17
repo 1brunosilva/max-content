@@ -49,7 +49,7 @@ Nada de letra chica nunca. Buen contraste (texto claro sobre base oscura). Una i
 La plataforma tapa bordes con su UI (likes, comentarios, caption, botones, barra). Para que el mismo video sirva en TikTok + Reels + Shorts, **todo el texto/elemento clave va dentro de la zona segura** (tomamos el caso más restrictivo, Reels, con margen):
 - **TOP 220px · BOTTOM 420px · IZQUIERDA 90px · DERECHA 130px** (la derecha un poco más por el stack de íconos).
 - Área útil ≈ **x: 90–950, y: 220–1500**. El error más común: texto pegado al borde derecho o muy abajo → lo tapan.
-- Verificar con el helper **`SafeArea`** del kit (overlay visible solo en preview/dev). Fuente: `research/JUEGOS-MENTALES-RESEARCH.md`. ⚠️ los píxeles cambian si las apps actualizan su UI.
+- Verificar con el helper **`SafeArea`** del kit (overlay visible solo en preview/dev). Fuente: `research/FORMATO-VERTICAL.md`. ⚠️ los píxeles cambian si las apps actualizan su UI.
 
 ### 🎬 LA ANIMACIÓN ES LA PROTAGONISTA (no el texto)
 Lo principal es el **movimiento/mecanismo**; el texto **acompaña y nombra**, no al revés. Si sacás la animación y el video sigue "entendiéndose" como una placa con texto → está mal: era una infografía, no un experimento. El espectador primero VIVE el efecto (animación), después lee el payoff.
@@ -79,4 +79,6 @@ Lo principal es el **movimiento/mecanismo**; el texto **acompaña y nombra**, no
 4. Render + **verificar leyendo frames** (nunca describir desde el código).
 5. (Próximo) voice over TTS + música.
 
-Fuente de verdad: este `STYLE-DNA.md` + `EMPEZAR-ACA-VIDEO.md` + `EXPERIMENT-PLAYBOOK.md` (formato experimento + biblioteca de ideas). ADN en código: `src/apple/kit.tsx`.
+⛔ Regla dura (Bruno): NUNCA re-montar experimentos famosos de laboratorio / ilusiones de percepción (gorila, McGurk, Stroop, Ames, bailarina, cambio ciego…). La psicología se demuestra con el contenido REAL del negocio. Ver `EXPERIMENT-PLAYBOOK.md`.
+
+Fuente de verdad: este `STYLE-DNA.md` + `EMPEZAR-ACA-VIDEO.md` + `EXPERIMENT-PLAYBOOK.md` (formato experimento + biblioteca de ideas) + `research/FORMATO-VERTICAL.md` (zonas seguras). ADN en código: `src/apple/kit.tsx`.
