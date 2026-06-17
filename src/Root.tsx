@@ -23,6 +23,11 @@ import { Seguimiento, SEGUIMIENTO_DURATION } from './apple/Seguimiento';
 import { Anchor, ANCHOR_DURATION } from './apple/Anchor';
 import { PruebaSocial, PRUEBASOCIAL_DURATION } from './apple/PruebaSocial';
 import { PreguntaAbierta, PREGUNTAABIERTA_DURATION } from './apple/PreguntaAbierta';
+import { EchoStack, ECHOSTACK_DURATION } from './apple/EchoStack';
+import { PrimerSegundo, PRIMERSEGUNDO_DURATION } from './apple/PrimerSegundo';
+import { Contraste, CONTRASTE_DURATION } from './apple/Contraste';
+import { EsperaQueDuele, ESPERAQUEDUELE_DURATION } from './apple/EsperaQueDuele';
+import { BlurReveal, BLURREVEAL_DURATION } from './apple/BlurReveal';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -94,6 +99,21 @@ export const RemotionRoot: React.FC = () => {
 
       {/* PreguntaAbierta — mecanismo #14: anillo de luz que NO se cierra (bucle abierto) → se cierra en el payoff → "una pregunta abre la cabeza". */}
       <Composition id="PreguntaAbierta" component={PreguntaAbierta} durationInFrames={PREGUNTAABIERTA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EchoStack — mecanismo #15: Illusory Truth Effect. La misma frase 3 veces, más brillante cada vez. */}
+      <Composition id="EchoStack" component={EchoStack} durationInFrames={ECHOSTACK_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PrimerSegundo — mecanismo #16: barra 3s corre, 7 avatares caen uno a uno, quedan 2/9. Atención/hook. Cyan. */}
+      <Composition id="PrimerSegundo" component={PrimerSegundo} durationInFrames={PRIMERSEGUNDO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Contraste — mecanismo #17: una card de $15.900 sola → entra la tuya al lado → la tuya parece razonable. Dorado. */}
+      <Composition id="Contraste" component={Contraste} durationInFrames={CONTRASTE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EsperaQueDuele — mecanismo #18: mensaje cálido → reloj corre → card se enfría y se va. Ámbar. */}
+      <Composition id="EsperaQueDuele" component={EsperaQueDuele} durationInFrames={ESPERAQUEDUELE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* BlurReveal — mecanismo #19: Context-dependent Mere Exposure. Tu marca borrosa vs competidor nítido → el espectador elige al nítido. Dorado/rosa. */}
+      <Composition id="BlurReveal" component={BlurReveal} durationInFrames={BLURREVEAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
