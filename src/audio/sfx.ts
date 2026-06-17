@@ -4,12 +4,11 @@
  * mecanismo. Cada cue está atado a un frame concreto del movimiento (calculado del
  * código de cada componente), así el sonido ENCARNA el mecanismo igual que el visual.
  *
- * Música = 4 camas generadas a medida (modernas/fuertes, NO bailarinas), asignadas
- * por mood:
- *   - music-driving.m4a   pulso fuerte/propulsivo (atención, ritmo, acumulación)
- *   - music-dark.m4a      tensión cinematográfica (pérdida, presión, lo que se va)
- *   - music-anthemic.m4a  épica contenida (revelación, llegada, ancla/precio)
- *   - music-minimal.m4a   hipnótica/minimal (experimentos de percepción)
+ * Música = 4 variaciones del estilo minimal/clean/electrónico (aprobado por Bruno 17/6):
+ *   - music-minimal.m4a         original aprobado (TypeScan, RecallTest, MereExposure)
+ *   - music-minimal-pulse.m4a   minimal con pulso rítmico sutil (acumulación, momentum)
+ *   - music-minimal-tension.m4a minimal con tensión/suspense (pérdida, presión)
+ *   - music-minimal-warm.m4a    minimal cálido/revelatorio (descubrimiento, ancla)
  * Archivos en public/audio/.
  */
 
@@ -33,7 +32,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // Conveyor (240f): fila de promos que pasa y FRENA → glow → payoff.
   Conveyor: {
-    music: 'music-driving.m4a',
+    music: 'music-minimal-pulse.m4a',
     musicVolume: 0.14,
     cues: [
       { at: 1, src: 'tick.mp3', volume: 0.22 },
@@ -48,7 +47,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // SilentChurn (280f): clientes aparecen, uno se apaga EN SILENCIO → realización.
   SilentChurn: {
-    music: 'music-dark.m4a',
+    music: 'music-minimal-tension.m4a',
     musicVolume: 0.13,
     cues: [
       tick(7, 0.22), tick(13, 0.28), tick(19, 0.28), tick(25, 0.28), tick(31, 0.28), tick(37, 0.28),
@@ -62,7 +61,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // GridBreak (270f): grilla de 9 → una sube y rompe → glow → payoff.
   GridBreak: {
-    music: 'music-driving.m4a',
+    music: 'music-minimal-pulse.m4a',
     musicVolume: 0.14,
     cues: [
       tick(8, 0.26), tick(14, 0.26), tick(20, 0.26), tick(28, 0.26), tick(36, 0.26), tick(44, 0.26), tick(52, 0.26), tick(60, 0.26), tick(66, 0.26),
@@ -76,7 +75,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // Materialize (330f): recibo "gratis" → revela 80hs de tu tiempo → payoff.
   Materialize: {
-    music: 'music-anthemic.m4a',
+    music: 'music-minimal-warm.m4a',
     musicVolume: 0.13,
     cues: [
       { at: 8, src: 'whoosh.mp3', volume: 0.38 },
@@ -95,7 +94,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // TimeSlip (310f): cámara salta de año en año (acelerando) → frena en 2027 → payoff.
   TimeSlip: {
-    music: 'music-dark.m4a',
+    music: 'music-minimal-tension.m4a',
     musicVolume: 0.13,
     cues: [
       tick(7, 0.22),
@@ -111,7 +110,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // MilCortes (305f, fondo claro): tareas caen una a una, suman tiempo oculto → payoff.
   MilCortes: {
-    music: 'music-driving.m4a',
+    music: 'music-minimal-pulse.m4a',
     musicVolume: 0.13,
     cues: [
       tick(7, 0.24),
@@ -147,7 +146,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // RisingBar (449f): 4 experiencias suben la vara → tu propuesta queda abajo → payoff.
   RisingBar: {
-    music: 'music-driving.m4a',
+    music: 'music-minimal-pulse.m4a',
     musicVolume: 0.14,
     cues: [
       tick(12, 0.26),
@@ -166,7 +165,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // PeakEnd (336f): 6 momentos → quedan 1° y último con glow → payoff.
   PeakEnd: {
-    music: 'music-anthemic.m4a',
+    music: 'music-minimal-warm.m4a',
     musicVolume: 0.13,
     cues: [
       tick(10, 0.3), tick(16, 0.3), tick(22, 0.3), tick(28, 0.28), tick(34, 0.28), tick(40, 0.3),
@@ -180,7 +179,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // LossFrame (336f): barra ganar vs barra perder (2.5×) → payoff.
   LossFrame: {
-    music: 'music-dark.m4a',
+    music: 'music-minimal-tension.m4a',
     musicVolume: 0.13,
     cues: [
       tick(12, 0.26),
@@ -195,7 +194,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // Anchor (336f): ancla $2.000 → se achica → $890 parece barato → payoff.
   Anchor: {
-    music: 'music-anthemic.m4a',
+    music: 'music-minimal-warm.m4a',
     musicVolume: 0.13,
     cues: [
       tick(12, 0.26),
@@ -213,7 +212,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // OpenLoop (336f): círculo que llega a 91% y NO cierra (zeigarnik) → payoff.
   OpenLoop: {
-    music: 'music-dark.m4a',
+    music: 'music-minimal-tension.m4a',
     musicVolume: 0.13,
     cues: [
       tick(12, 0.26),
@@ -242,7 +241,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // PriceFlip (480f): precio solo (incierto) → ancla $6.000 → parece barato (flip) → payoff.
   PriceFlip: {
-    music: 'music-anthemic.m4a',
+    music: 'music-minimal-warm.m4a',
     musicVolume: 0.13,
     cues: [
       { at: 26, src: 'whoosh.mp3', volume: 0.36 },
@@ -260,7 +259,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // Autopilot (492f): dashboard que trabaja solo (contadores + feed) → payoff aspiracional.
   Autopilot: {
-    music: 'music-driving.m4a',
+    music: 'music-minimal-pulse.m4a',
     musicVolume: 0.13,
     cues: [
       tick(36, 0.22), { at: 72, src: 'thunk.mp3', volume: 0.32 },
@@ -275,7 +274,7 @@ export const SFX: Record<string, AudioTrack> = {
 
   // Bottleneck (368f): tareas orbitan alrededor de VOS → VOS se va y todo se congela → payoff.
   Bottleneck: {
-    music: 'music-dark.m4a',
+    music: 'music-minimal-tension.m4a',
     musicVolume: 0.13,
     cues: [
       { at: 7, src: 'whoosh.mp3', volume: 0.32 },
