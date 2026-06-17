@@ -19,6 +19,7 @@ import { PriceFlip, PRICEFLIP_DURATION } from './PriceFlip';
 import { Overload, OVERLOAD_DURATION } from './Overload';
 import { Autopilot, AUTOPILOT_DURATION } from './Autopilot';
 import { FreedomManifesto, FREEDOMMANIFESTO_DURATION } from './FreedomManifesto';
+import { FreedomManifestoV2, FREEDOMMANIFESTOV2_DURATION } from './FreedomManifestoV2';
 
 /**
  * Root SEPARADO para exploraciones — entry propio, NO toca src/Root.tsx (evita
@@ -46,5 +47,6 @@ export const ExploreRoot: React.FC = () => (
     <Composition id="Overload" component={Overload} durationInFrames={OVERLOAD_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
     <Composition id="Autopilot" component={Autopilot} durationInFrames={AUTOPILOT_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
     <Composition id="FreedomManifesto" component={FreedomManifesto} durationInFrames={FREEDOMMANIFESTO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+    <Composition id="FreedomManifestoV2" component={FreedomManifestoV2} durationInFrames={FREEDOMMANIFESTOV2_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
   </>
 );
