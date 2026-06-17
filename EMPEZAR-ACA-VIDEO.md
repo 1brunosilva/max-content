@@ -17,6 +17,36 @@
 - SilentChurn: un cliente se apaga SIN glow (no lo notás) → "se fue y no te enteraste".
 Cada video nuevo: **concepto psicológico + un mecanismo que lo hace experimentar.**
 
+## 1.5 ⭐⭐ EL FORMATO QUE MÁS LE GUSTA A BRUNO (priorizar SIEMPRE): la REFLEXIÓN / insight de marketing
+Los 2 favoritos absolutos de Bruno son **TypeScan** ("1 segundo, 2 palabras" — tu cliente escanea, no lee) y **Conveyor** ("pasaste por 9 marcas, no te acordás de ninguna"). ¿Qué tienen en común? **Te ENSEÑAN una verdad de marketing real y NO obvia, demostrándola con un ejemplo**, y te hacen pensar *"guau, es verdad, no lo había considerado"*. Después la conectan con su propio cliente (*"a tu consumidor le pasa lo mismo"*).
+**La fórmula del formato rey:**
+1. Una **verdad de marketing/psicología del consumidor** que el dueño NO tenía presente (no un lugar común). Algo que vos sí sabés y él no.
+2. **EXPERIMENTO SOBRE EL ESPECTADOR (lo más importante):** el video le HACE VIVIR el efecto en su propia cabeza EN TIEMPO REAL, y recién después se lo nombra ("¿viste lo que te acaba de pasar?"). NO es ilustrar/diagramar un tip desde afuera (eso = infografía genérica, FALLA). TypeScan: VOS escaneaste y captaste 2 palabras. Conveyor: VOS pasaste 9 marcas y no recordaste ninguna. → primero le pasa a ÉL, después se revela. Si el espectador solo MIRA un gráfico del concepto en vez de VIVIRLO, está mal.
+3. **"A tu cliente le pasa igual"** — conectar el insight con su negocio.
+4. Eso te posiciona como **el que SABE** (autoridad) → genera ganas de seguirte/contratarte. La venta es indirecta, por valor — no arranca vendiendo.
+Es VALOR/enseñanza primero. Buscar SIEMPRE muchas ideas de este estilo (verdades de atención, memoria, decisión, percepción, confianza que el dueño no considera). Este formato gana sobre la venta directa.
+
+## 1.6 ♾️ VARIEDAD / EXPANSIÓN — SIEMPRE distinto (regla de Bruno)
+Regla madre: **cada video distinto del anterior en TODO** (animación, guión, mecanismo, tema). Se logra recombinando EJES, manteniendo fijo lo que a Bruno le gusta.
+
+**INVARIANTES (NUNCA cambian — son "lo que le gusta" = la marca):** el mecanismo encarna el mensaje · formato reflexión/insight (enseña una verdad, nunca genérico) · texto CENTRADO, grande y legible · ritmo lento (se lee, cierre con hold) · glow/luz como foco · premium/cinematográfico · un acento · física Apple · ADN del kit.
+
+**EJES QUE VARÍAN (recombinar; NUNCA repetir el del video anterior):**
+1. **Modo visual:** glassy-oscuro · editorial-claro · midnight-línea · real/raw · [a abrir: MAX-personaje · híbrido foto-real · data · objeto-3D · blueprint/iso].
+2. **Mecanismo (verbo×objeto):** stack, fan, coverflow, conveyor, zoom-into, flip, count, orbit, materialize, scatter, parallax, scan, rising-bar, grid-break… (verbos en `kit.tsx`).
+3. **Lever psicológico:** loss aversion, FOMO, anclaje, prueba social, identidad, JTBD, zeigarnik, paradoja de elección, autoridad, contraste, **mera exposición, peak-end, precio-cero, aversión a la ambigüedad**, escasez, reciprocidad, compromiso…
+4. **Formato:** reflexión/insight (rey) · hook contrario · "3 cosas" · derribar mito · historia · revelación de número · antes/después.
+5. **Objeto:** mensajes, cards, dashboard, números, documentos, reseñas, notificaciones, avatares, precios, logos…
+6. **Acento/paleta:** violeta+glow · cyan · dorado · crema…
+
+**LA MATEMÁTICA (por qué nunca se agota):** ~6 modos × ~15 mecanismos × ~15 levers × ~7 formatos = **miles de combinaciones únicas.** El espacio es prácticamente infinito.
+
+**REGLAS para mantenerlo amplio y sin repetir:**
+- **Rotación:** no repetir mecanismo, lever, modo ni paleta del video inmediato anterior.
+- **Registro:** anotar cada video producido (modo+mecanismo+lever+tema+paleta) para no repetir y ver cobertura (futuro `src/content/produced.ts`).
+- **Expandir, no reusar:** cuando un eje se siente "gastado", **ABRIR un valor nuevo** (un modo nuevo, un verbo nuevo, un lever del banco de psicología) en vez de reciclar — cada valor nuevo MULTIPLICA el espacio.
+- Si algo se empieza a parecer a algo ya hecho → cambiar de eje. La meta es que dos videos seguidos no compartan ni el mecanismo ni la sensación.
+
 ## 2. El ADN (no negociable)
 Leé `STYLE-DNA.md`. Resumen:
 - 3D real (perspective/rotateY/translateZ), física Apple (entra rápido, **desacelera y se asienta**, micro-overshoot), drift constante (nada quieto).

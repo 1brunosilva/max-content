@@ -13,6 +13,13 @@ import { CardWheel, CARDWHEEL_DURATION } from './apple/CardWheel';
 import { StackFan, STACKFAN_DURATION } from './apple/StackFan';
 import { Conveyor, CONVEYOR_DURATION } from './apple/Conveyor';
 import { SilentChurn, SILENTCHURN_DURATION } from './apple/SilentChurn';
+import { GridBreak, GRIDBREAK_DURATION } from './apple/GridBreak';
+import { Materialize, MATERIALIZE_DURATION } from './apple/Materialize';
+import { FlipCompare, FLIPCOMPARE_DURATION } from './apple/FlipCompare';
+import { TimeSlip, TIMESLIP_DURATION } from './apple/TimeSlip';
+import { MilCortes, MILCORTES_DURATION } from './apple/MilCortes';
+import { Pestanas, PESTANAS_DURATION } from './apple/Pestanas';
+import { Seguimiento, SEGUIMIENTO_DURATION } from './apple/Seguimiento';
 
 /**
  * Root del sistema de video "Glassy Motion". Ver max-content/VIDEO-SYSTEM.md.
@@ -53,6 +60,27 @@ export const RemotionRoot: React.FC = () => {
 
       {/* SilentChurn — mecanismo #4: lista de clientes, uno se va en silencio → realización. */}
       <Composition id="SilentChurn" component={SilentChurn} durationInFrames={SILENTCHURN_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* GridBreak — mecanismo #5: grilla 3×3 genérica → una rompe → Siri glow → payoff. */}
+      <Composition id="GridBreak" component={GridBreak} durationInFrames={GRIDBREAK_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Materialize — mecanismo #6: presupuesto que se arma → "GRATIS" → costo real se dispara. */}
+      <Composition id="Materialize" component={Materialize} durationInFrames={MATERIALIZE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* FlipCompare — mecanismo #7: la card del negocio se voltea en 3D → mismos campos, respuestas opuestas. */}
+      <Composition id="FlipCompare" component={FlipCompare} durationInFrames={FLIPCOMPARE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* TimeSlip — mecanismo #8: los años viajan por el eje Z (regret aversion) → slam en 2027 → payoff. */}
+      <Composition id="TimeSlip" component={TimeSlip} durationInFrames={TIMESLIP_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* MilCortes — mecanismo #9: micro-tareas que caen y suman → "5h 40m/semana" (costo invisible de lo manual). */}
+      <Composition id="MilCortes" component={MilCortes} durationInFrames={MILCORTES_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Pestanas — mecanismo #10: tareas a medio cerrar que laten → se cierran solas con glow Siri (Zeigarnik). */}
+      <Composition id="Pestanas" component={Pestanas} durationInFrames={PESTANAS_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Seguimiento — mecanismo #11: dos vías paralelas, con y sin seguimiento → la venta aparece del follow-up. */}
+      <Composition id="Seguimiento" component={Seguimiento} durationInFrames={SEGUIMIENTO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
     </>
   );
 };

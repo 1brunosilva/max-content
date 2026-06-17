@@ -32,6 +32,11 @@ profundidad cinematográfica, movimiento controlado. La tecnología, integrada y
 - **Conciencia espacial:** capas que se apilan/deslizan/profundizan como en el mundo real.
 - **Sin movimiento decorativo:** cada animación comunica un cambio; si no, sobra (HIG).
 
+## ⏱️ LEGIBILIDAD Y TIEMPO DE LECTURA (regla de Bruno, obligatoria)
+- **Apenitas más lento, SIEMPRE (Bruno, regla firme):** errar del lado de que se entienda. Mejor un toque lento que apurado. Truco de implementación: **time-scale global** por composición — `const f = useCurrentFrame() / SLOW` con `SLOW≈1.15` y escalar `durationInFrames` por el mismo factor → todo ~15% más lento con un solo cambio.
+- **Dar tiempo a leer:** si hay texto, que se lea sin apuro. El **payoff/cierre SIEMPRE con buen hold (~3–3.5s visible)**. Regla práctica: poder leer la frase en voz alta ~2 veces antes del corte.
+- **Legibilidad para ICP adulto (no todos ven 20/20):** los labels/notas al pie (DM Mono, tipo "LO QUE ESCRIBISTE") **NO chicos** → mínimo ~30px en 1080px de ancho. Headlines grandes, buen contraste. Ante la duda, agrandá.
+
 ## Tendencias 2026 a usar (verificado)
 - **Tipografía cinética** con variable fonts (peso/ancho que muta) — contraste de peso extremo.
 - **3D premium hiperrealista** para lanzamientos/tech storytelling.
@@ -57,4 +62,4 @@ profundidad cinematográfica, movimiento controlado. La tecnología, integrada y
 4. Render + **verificar leyendo frames** (nunca describir desde el código).
 5. (Próximo) voice over TTS + música.
 
-Fuente de verdad del sistema general: `VIDEO-SYSTEM.md`. ADN en código: `src/apple/kit.tsx`.
+Fuente de verdad: este `STYLE-DNA.md` + `EMPEZAR-ACA-VIDEO.md`. ADN en código: `src/apple/kit.tsx`.
