@@ -1,0 +1,13 @@
+{
+  "composition": "StackFan",
+  "name": "La paradoja de la elección",
+  "mechanism": "StackFan",
+  "lever": "paradox_of_choice",
+  "visual_mode": "glassy_dark",
+  "format": "reflection",
+  "palette": "violet",
+  "hook_text": "¿Cuántas opciones es demasiado?",
+  "payoff_text": "Más opciones, menos decisiones. Tus clientes se paralizan.",
+  "duration_sec": 30,
+  "share_to_feed": false
+}
