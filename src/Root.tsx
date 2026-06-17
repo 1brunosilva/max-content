@@ -20,6 +20,9 @@ import { TimeSlip, TIMESLIP_DURATION } from './apple/TimeSlip';
 import { MilCortes, MILCORTES_DURATION } from './apple/MilCortes';
 import { Pestanas, PESTANAS_DURATION } from './apple/Pestanas';
 import { Seguimiento, SEGUIMIENTO_DURATION } from './apple/Seguimiento';
+import { Anchor, ANCHOR_DURATION } from './apple/Anchor';
+import { PruebaSocial, PRUEBASOCIAL_DURATION } from './apple/PruebaSocial';
+import { PreguntaAbierta, PREGUNTAABIERTA_DURATION } from './apple/PreguntaAbierta';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -82,6 +85,18 @@ export const RemotionRoot: React.FC = () => {
 
       {/* Seguimiento — mecanismo #11: dos vías paralelas, con y sin seguimiento → la venta aparece del follow-up. */}
       <Composition id="Seguimiento" component={Seguimiento} durationInFrames={SEGUIMIENTO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Anchor — mecanismo #12: precio ancla $9.900 se tacha → real $4.900 con glow → "el primer número ancla todo". */}
+      <Composition id="Anchor" component={Anchor} durationInFrames={ANCHOR_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PruebaSocial — mecanismo #13: río de reseñas 5★ en cover-flow + contador → una queda al frente → "la prueba social vende sola". */}
+      <Composition id="PruebaSocial" component={PruebaSocial} durationInFrames={PRUEBASOCIAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PreguntaAbierta — mecanismo #14: anillo de luz que NO se cierra (bucle abierto) → se cierra en el payoff → "una pregunta abre la cabeza". */}
+      <Composition id="PreguntaAbierta" component={PreguntaAbierta} durationInFrames={PREGUNTAABIERTA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
+      <AudioCompositions />
     </>
   );
 };
