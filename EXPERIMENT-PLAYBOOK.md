@@ -1,22 +1,12 @@
-# 🧪 EXPERIMENT PLAYBOOK — el formato por defecto de los videos de Concepto
-> El video le **HACE VIVIR** un efecto en la cabeza del espectador en tiempo real, después lo nombra, y lo conecta con su negocio. Este es el formato **rey** del sistema (manda sobre la venta directa).
+# 🧪 IDEAS DE VIDEO — banco de conceptos
+> Biblioteca de ideas para videos de Concepto. No es una fórmula obligatoria — es un banco de inspiración.
+> La única regla de concepto: **el mecanismo encarna el mensaje** (ver EMPEZAR-ACA-VIDEO.md §1).
+> Lo ideal, cuando se pueda: que el espectador lo viva mientras mira, no que lo observe desde afuera.
 >
-> ⛔ **REGLA DURA (Bruno):** NO re-montar experimentos famosos de laboratorio / ilusiones de percepción (el gorila invisible, McGurk, Stroop, cuarto de Ames, la bailarina que gira, cambio ciego, etc.). Eso queda PROHIBIDO. Lo que usamos es **psicología de marketing demostrada con el contenido REAL del negocio** (sus precios, mensajes, clientes, cards, reseñas, planes). El espectador igual lo VIVE — pero con material del negocio, no con un truco de percepción de la tele.
+> ⛔ NO re-montar experimentos famosos de laboratorio (gorila invisible, McGurk, Stroop, Ames, bailarina, cambio ciego). Demostrar siempre con contenido real del negocio.
 
-## La fórmula (4 pasos, siempre)
-1. **GANCHO QUE LE PASA A ÉL (0–3s):** una micro-experiencia que el espectador *vive* mirando contenido del negocio (pasa 9 marcas y no recuerda ninguna; escanea una landing y capta 2 palabras; ve abrirse 5 opciones y se traba). NO se explica un tip desde afuera — eso es infografía genérica y FALLA.
-2. **REVELACIÓN ("¿viste lo que te pasó?"):** se le muestra que cayó en el efecto.
-3. **"A tu cliente le pasa igual":** se conecta el efecto con una verdad de marketing NO obvia sobre su negocio.
-4. **CIERRE (peak-end):** payoff corto y grande, con buen hold (~3–3.5s). A veces enseña y nada más (contenido); a veces conecta a un servicio de Concepto (venta).
-
-## El mix (regla de Bruno): ~70% contenido / ~30% venta
-La mayoría de los videos **enseñan** (valor → autoridad → ganas de seguirte/contratarte). Algunos cierran conectando a un servicio. **Etiqueta:** `C` = contenido puro · `V` = cierra en venta.
-
-## Invariantes (NO cambian — son la marca)
-Mecanismo encarna el mensaje · experimento sobre el espectador **con contenido del negocio** · texto **grande, centrado, legible** (ver STYLE-DNA, piso de tamaños) · **todo dentro de la zona segura** (TOP 220 / BOTTOM 420 / IZQ 90 / DER 130 en 1080×1920; ver `research/FORMATO-VERTICAL.md`) · ritmo lento (se lee, cierre con hold) · **la animación es la protagonista** · glow Siri como foco · física Apple · ADN del kit.
-
-## Ejes que varían (nunca repetir el del video anterior)
-Modo visual · mecanismo (verbo×objeto del `kit.tsx`) · lever psicológico · paleta. Ver los 6 ejes en `EMPEZAR-ACA-VIDEO.md` §1.6.
+## Mix orientativo: ~70% contenido / ~30% venta
+`C` = contenido puro · `V` = cierra en venta
 
 ---
 

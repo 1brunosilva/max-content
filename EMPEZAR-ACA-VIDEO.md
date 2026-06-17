@@ -5,8 +5,7 @@
 > con lo que se logró en la sesión del 2026-06-16, que Bruno calificó de "brillante / 9-10".
 > No empieces de cero.
 >
-> **REGLAS NUEVAS (17/6, leyes):** (1) el **formato por defecto es el EXPERIMENTO** que le pasa al
-> espectador (ver `EXPERIMENT-PLAYBOOK.md` — tiene la fórmula + 30 ideas listas, **sin casos de laboratorio**). (2) Mix **~70%
+> **REGLAS (17/6):** (1) El **mecanismo encarna el mensaje** — esa es la regla de concepto. Si además el espectador lo vive mientras mira, mejor. Ver banco de ideas en `EXPERIMENT-PLAYBOOK.md`. (2) Mix **~70%
 > contenido / 30% venta**. (3) **Letras grandes** (pisos en STYLE-DNA: labels ≥40px, cuerpo ≥52px,
 > payoff ≥88px). (4) Todo el texto clave dentro de la **zona segura** (TOP 220 / BOTTOM 420 / IZQ 90 /
 > DER 130 en 1080×1920; usar el helper `SafeArea` del kit). (5) **La animación es la protagonista**,
@@ -28,14 +27,8 @@
 - SilentChurn: un cliente se apaga SIN glow (no lo notás) → "se fue y no te enteraste".
 Cada video nuevo: **concepto psicológico + un mecanismo que lo hace experimentar.**
 
-## 1.5 ⭐⭐ EL FORMATO QUE MÁS LE GUSTA A BRUNO (priorizar SIEMPRE): la REFLEXIÓN / insight de marketing
-Los 2 favoritos absolutos de Bruno son **TypeScan** ("1 segundo, 2 palabras" — tu cliente escanea, no lee) y **Conveyor** ("pasaste por 9 marcas, no te acordás de ninguna"). ¿Qué tienen en común? **Te ENSEÑAN una verdad de marketing real y NO obvia, demostrándola con un ejemplo**, y te hacen pensar *"guau, es verdad, no lo había considerado"*. Después la conectan con su propio cliente (*"a tu consumidor le pasa lo mismo"*).
-**La fórmula del formato rey:**
-1. Una **verdad de marketing/psicología del consumidor** que el dueño NO tenía presente (no un lugar común). Algo que vos sí sabés y él no.
-2. **EXPERIMENTO SOBRE EL ESPECTADOR (lo más importante):** el video le HACE VIVIR el efecto en su propia cabeza EN TIEMPO REAL, y recién después se lo nombra ("¿viste lo que te acaba de pasar?"). NO es ilustrar/diagramar un tip desde afuera (eso = infografía genérica, FALLA). TypeScan: VOS escaneaste y captaste 2 palabras. Conveyor: VOS pasaste 9 marcas y no recordaste ninguna. → primero le pasa a ÉL, después se revela. Si el espectador solo MIRA un gráfico del concepto en vez de VIVIRLO, está mal.
-3. **"A tu cliente le pasa igual"** — conectar el insight con su negocio.
-4. Eso te posiciona como **el que SABE** (autoridad) → genera ganas de seguirte/contratarte. La venta es indirecta, por valor — no arranca vendiendo.
-Es VALOR/enseñanza primero. Buscar SIEMPRE muchas ideas de este estilo (verdades de atención, memoria, decisión, percepción, confianza que el dueño no considera). Este formato gana sobre la venta directa.
+## 1.5 ⭐⭐ REFERENCIA DE ORO
+Los 2 favoritos de Bruno: **TypeScan** ("1 segundo, 2 palabras") y **Conveyor** ("pasaste por 9 marcas, no te acordás de ninguna"). Lo que los hace brillantes: **enseñan una verdad no obvia de marketing, y el espectador la vive mientras mira** — no la ve explicada desde afuera. Si un video nuevo puede lograr eso, es el norte. Pero no es una fórmula obligatoria: es una aspiración.
 
 ## 1.6 ♾️ VARIEDAD / EXPANSIÓN — SIEMPRE distinto (regla de Bruno)
 Regla madre: **cada video distinto del anterior en TODO** (animación, guión, mecanismo, tema). Se logra recombinando EJES, manteniendo fijo lo que a Bruno le gusta.
