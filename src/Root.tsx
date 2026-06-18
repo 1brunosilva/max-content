@@ -50,6 +50,16 @@ import { ConfirmaBias, CONFIRMABIAS_DURATION } from './apple/ConfirmaBias';
 import { Compromiso, COMPROMISO_DURATION } from './apple/Compromiso';
 import { OrbitaTrust, ORBITATRUST_DURATION } from './apple/OrbitaTrust';
 import { PrecioMental, PRECIOMENTAL_DURATION } from './apple/PrecioMental';
+import { DefaultGana, DEFAULTGANA_DURATION } from './apple/DefaultGana';
+import { CompromisoMedio, COMPROMISOMEDIO_DURATION } from './apple/CompromisoMedio';
+import { FragmentaPrecio, FRAGMENTAPRECIO_DURATION } from './apple/FragmentaPrecio';
+import { FramingPerdida, FRAMINGPERDIDA_DURATION } from './apple/FramingPerdida';
+import { IdentidadRol, IDENTIDADROL_DURATION } from './apple/IdentidadRol';
+import { EspecificidadNum, ESPECIFICIDADNUM_DURATION } from './apple/EspecificidadNum';
+import { AutopilotoScroll, AUTOPILOTOSCROLL_DURATION } from './apple/AutopilotoScroll';
+import { RedConfianza, REDCONFIANZA_DURATION } from './apple/RedConfianza';
+import { VentanaTiempo, VENTANATIEMPO_DURATION } from './apple/VentanaTiempo';
+import { SesgoCerteza, SESGOCERTEZA_DURATION } from './apple/SesgoCerteza';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -202,6 +212,36 @@ export const RemotionRoot: React.FC = () => {
 
       {/* PrecioMental — mecanismo #41: Contabilidad mental. El mismo $5.000 enmarcado de 3 formas distintas. Verde. C. */}
       <Composition id="PrecioMental" component={PrecioMental} durationInFrames={PRECIOMENTAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* DefaultGana — mecanismo #42: Sesgo del default. Plan del medio pre-marcado, 73/100 no lo cambian. Cyan. C. */}
+      <Composition id="DefaultGana" component={DefaultGana} durationInFrames={DEFAULTGANA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CompromisoMedio — mecanismo #43: Compromise effect. Cursor elige el del medio solo. Dorado. C. */}
+      <Composition id="CompromisoMedio" component={CompromisoMedio} durationInFrames={COMPROMISOMEDIO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* FragmentaPrecio — mecanismo #44: Price chunking. $180.000/año → $493/día. Verde. C. */}
+      <Composition id="FragmentaPrecio" component={FragmentaPrecio} durationInFrames={FRAGMENTAPRECIO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* FramingPerdida — mecanismo #45: Framing loss vs gain. Mismo dato, dos encuadres opuestos. Rosa. C. */}
+      <Composition id="FramingPerdida" component={FramingPerdida} durationInFrames={FRAMINGPERDIDA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* IdentidadRol — mecanismo #46: Identity-based motivation. ROL ACTUAL → ROL QUE ELEGÍS con glow. Violeta. C. */}
+      <Composition id="IdentidadRol" component={IdentidadRol} durationInFrames={IDENTIDADROL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EspecificidadNum — mecanismo #47: Specificity effect. "100 clientes" tachado → "97 verificados". Cyan-azul. C. */}
+      <Composition id="EspecificidadNum" component={EspecificidadNum} durationInFrames={ESPECIFICIDADNUM_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* AutopilotoScroll — mecanismo #48: Cognitive autopilot. Feed vertical scrollea, un card rompe el patrón. Ámbar. C. */}
+      <Composition id="AutopilotoScroll" component={AutopilotoScroll} durationInFrames={AUTOPILOTOSCROLL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* RedConfianza — mecanismo #49: Network/in-group effect. Nodos se conectan con luz, uno queda solo. Cyan. V. */}
+      <Composition id="RedConfianza" component={RedConfianza} durationInFrames={REDCONFIANZA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* VentanaTiempo — mecanismo #50: Urgencia temporal. Ventana 3D que se cierra lentamente. Ámbar. V. */}
+      <Composition id="VentanaTiempo" component={VentanaTiempo} durationInFrames={VENTANATIEMPO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SesgoCerteza — mecanismo #51: Certainty effect (Allais). $1.000 seguro vs $2.200 al 50% — EV reveal. Violeta. C. */}
+      <Composition id="SesgoCerteza" component={SesgoCerteza} durationInFrames={SESGOCERTEZA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
