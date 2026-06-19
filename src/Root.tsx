@@ -60,6 +60,16 @@ import { AutopilotoScroll, AUTOPILOTOSCROLL_DURATION } from './apple/AutopilotoS
 import { RedConfianza, REDCONFIANZA_DURATION } from './apple/RedConfianza';
 import { VentanaTiempo, VENTANATIEMPO_DURATION } from './apple/VentanaTiempo';
 import { SesgoCerteza, SESGOCERTEZA_DURATION } from './apple/SesgoCerteza';
+import { FluidezTipo, FLUIDEZTYPE_DURATION } from './apple/FluidezTipo';
+import { CaraConfianza, CARACONFIANZA_DURATION } from './apple/CaraConfianza';
+import { DotDotDot, DOTDOTDOT_DURATION } from './apple/DotDotDot';
+import { SlotFeed, SLOTFEED_DURATION } from './apple/SlotFeed';
+import { SocialNorm, SOCIALNORM_DURATION } from './apple/SocialNorm';
+import { TunnelVision, TUNNELVISION_DURATION } from './apple/TunnelVision';
+import { EndowmentCard, ENDOWMENTCARD_DURATION } from './apple/EndowmentCard';
+import { CurvaPerdida, CURVAPERDIDA_DURATION } from './apple/CurvaPerdida';
+import { PresenteBias, PRESENTEBIAS_DURATION } from './apple/PresenteBias';
+import { EsfuerzoValor, ESFUERZOVALOR_DURATION } from './apple/EsfuerzoValor';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -242,6 +252,36 @@ export const RemotionRoot: React.FC = () => {
 
       {/* SesgoCerteza — mecanismo #51: Certainty effect (Allais). $1.000 seguro vs $2.200 al 50% — EV reveal. Violeta. C. */}
       <Composition id="SesgoCerteza" component={SesgoCerteza} durationInFrames={SESGOCERTEZA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* FluidezTipo — mecanismo #52: Cognitive fluency. Texto difícil = menos creíble. Barras de confianza 32% vs 91%. Crema/violeta editorial-claro. C. */}
+      <Composition id="FluidezTipo" component={FluidezTipo} durationInFrames={FLUIDEZTYPE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CaraConfianza — mecanismo #53: Mere exposure effect. Logo visto 3 veces con glow creciente. Rosa/dorado. C. */}
+      <Composition id="CaraConfianza" component={CaraConfianza} durationInFrames={CARACONFIANZA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* DotDotDot — mecanismo #54: Anticipación + violación de expectativa. Tres puntos que aparecen y desaparecen sin respuesta. Ámbar. V. */}
+      <Composition id="DotDotDot" component={DotDotDot} durationInFrames={DOTDOTDOT_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SlotFeed — mecanismo #55: Variable ratio reinforcement. El feed es una máquina tragamonedas. Ámbar. C. */}
+      <Composition id="SlotFeed" component={SlotFeed} durationInFrames={SLOTFEED_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SocialNorm — mecanismo #56: Norma social descriptiva. "8 de cada 10 negocios ya lo usan." Barra progresiva. Verde editorial-claro. C. */}
+      <Composition id="SocialNorm" component={SocialNorm} durationInFrames={SOCIALNORM_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* TunnelVision — mecanismo #57: Tunneling / scarcity mindset. Vignette que oscurece todo excepto "APAGAR INCENDIO". Midnight-índigo. C. */}
+      <Composition id="TunnelVision" component={TunnelVision} durationInFrames={TUNNELVISION_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EndowmentCard — mecanismo #58: Endowment effect. Misma card, "la tuya" vale 88%, la externa 45%. Dorado. C. */}
+      <Composition id="EndowmentCard" component={EndowmentCard} durationInFrames={ENDOWMENTCARD_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CurvaPerdida — mecanismo #59: Prospect theory. Barras asimétricas: perder duele 2.5x más que ganar. Violeta/data. C. */}
+      <Composition id="CurvaPerdida" component={CurvaPerdida} durationInFrames={CURVAPERDIDA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PresenteBias — mecanismo #60: Present bias / hiperbolic discounting. $50 HOY brilla, $100 en 30 días es borroso. Cyan. C. */}
+      <Composition id="PresenteBias" component={PresenteBias} durationInFrames={PRESENTEBIAS_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EsfuerzoValor — mecanismo #61: Effort heuristic. Misma propuesta construida paso a paso vs instantánea: 91% vs 38% valor percibido. Dorado. C. */}
+      <Composition id="EsfuerzoValor" component={EsfuerzoValor} durationInFrames={ESFUERZOVALOR_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
