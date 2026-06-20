@@ -70,6 +70,16 @@ import { EndowmentCard, ENDOWMENTCARD_DURATION } from './apple/EndowmentCard';
 import { CurvaPerdida, CURVAPERDIDA_DURATION } from './apple/CurvaPerdida';
 import { PresenteBias, PRESENTEBIAS_DURATION } from './apple/PresenteBias';
 import { EsfuerzoValor, ESFUERZOVALOR_DURATION } from './apple/EsfuerzoValor';
+import { CostoHundido, COSTOHUNDIDO_DURATION } from './apple/CostoHundido';
+import { OptimismoCiego, OPTIMISMOCIEGO_DURATION } from './apple/OptimismoCiego';
+import { PrecioCalidad, PRECIOCALIDAD_DURATION } from './apple/PrecioCalidad';
+import { ArranqueFresh, ARRANCUEFRESH_DURATION } from './apple/ArranqueFresh';
+import { BurbujaMente, BURBUJAMENTE_DURATION } from './apple/BurbujaMente';
+import { PuertaCerrada, PUERTACERRADA_DURATION } from './apple/PuertaCerrada';
+import { SimulaMente, SIMULAMENTE_DURATION } from './apple/SimulaMente';
+import { MomentoSocial, MOMENTOSOCIAL_DURATION } from './apple/MomentoSocial';
+import { DolorPago, DOLORPAGO_DURATION } from './apple/DolorPago';
+import { UmbralCambio, UMBRALCAMBIO_DURATION } from './apple/UmbralCambio';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -282,6 +292,36 @@ export const RemotionRoot: React.FC = () => {
 
       {/* EsfuerzoValor — mecanismo #61: Effort heuristic. Misma propuesta construida paso a paso vs instantánea: 91% vs 38% valor percibido. Dorado. C. */}
       <Composition id="EsfuerzoValor" component={EsfuerzoValor} durationInFrames={ESFUERZOVALOR_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CostoHundido — mecanismo #62: Sunk cost fallacy. Barras de dinero acumulado → "ya invertí tanto" → payoff "el pasado no decide". Índigo. C. */}
+      <Composition id="CostoHundido" component={CostoHundido} durationInFrames={COSTOHUNDIDO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* OptimismoCiego — mecanismo #63: Optimism bias. Problemas que le pasan a "otros" hasta que uno impacta. Ámbar. C. */}
+      <Composition id="OptimismoCiego" component={OptimismoCiego} durationInFrames={OPTIMISMOCIEGO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PrecioCalidad — mecanismo #64: Price-quality heuristic. Mismo producto, precio sube → calidad percibida sube. Dorado editorial-claro. C. */}
+      <Composition id="PrecioCalidad" component={PrecioCalidad} durationInFrames={PRECIOCALIDAD_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* ArranqueFresh — mecanismo #65: Fresh start effect. El lunes, 1 de mes, año nuevo disparan motivación. Cyan-verde. C. */}
+      <Composition id="ArranqueFresh" component={ArranqueFresh} durationInFrames={ARRANCUEFRESH_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* BurbujaMente — mecanismo #66: Filter bubble / echo chamber. Feed en loop siempre lo mismo → la burbuja se cierra. Azul midnight. C. */}
+      <Composition id="BurbujaMente" component={BurbujaMente} durationInFrames={BURBUJAMENTE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PuertaCerrada — mecanismo #67: Psychological reactance. EXCLUSIVO cerrado → deseo crece → se abre. Violeta. V. */}
+      <Composition id="PuertaCerrada" component={PuertaCerrada} durationInFrames={PUERTACERRADA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SimulaMente — mecanismo #68: Mental simulation / ownership visualization. Silueta vacía → features materializan → ownership. Rosa. C. */}
+      <Composition id="SimulaMente" component={SimulaMente} durationInFrames={SIMULAMENTE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* MomentoSocial — mecanismo #69: Social proof velocity. "47 nuevos esta semana" > "200 en total". Contador que acelera. Verde editorial-claro. C. */}
+      <Composition id="MomentoSocial" component={MomentoSocial} durationInFrames={MOMENTOSOCIAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* DolorPago — mecanismo #70: Pain of paying. Efectivo duele (rojo encoge) vs tarjeta (azul no duele). Azul frío / rojo. C. */}
+      <Composition id="DolorPago" component={DolorPago} durationInFrames={DOLORPAGO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* UmbralCambio — mecanismo #71: Weber-Fechner / JND. Barra sube sin ser percibida → cruza el umbral → GLOW. Crema editorial-claro. C. */}
+      <Composition id="UmbralCambio" component={UmbralCambio} durationInFrames={UMBRALCAMBIO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
