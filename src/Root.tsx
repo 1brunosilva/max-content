@@ -80,6 +80,18 @@ import { SimulaMente, SIMULAMENTE_DURATION } from './apple/SimulaMente';
 import { MomentoSocial, MOMENTOSOCIAL_DURATION } from './apple/MomentoSocial';
 import { DolorPago, DOLORPAGO_DURATION } from './apple/DolorPago';
 import { UmbralCambio, UMBRALCAMBIO_DURATION } from './apple/UmbralCambio';
+import { SesgoSupervivencia, SESGOSUPERVIVENCIA_DURATION } from './apple/SesgoSupervivencia';
+import { EgoDepletion, EGODEPLETION_DURATION } from './apple/EgoDepletion';
+import { MomentoCero, MOMENTOCERO_DURATION } from './apple/MomentoCero';
+import { VozCliente, VOZCLIENTE_DURATION } from './apple/VozCliente';
+import { SilencioElocuente, SILENCIOELOCUENTE_DURATION } from './apple/SilencioElocuente';
+import { VentajaInvisible, VENTAJAINVISIBLE_DURATION } from './apple/VentajaInvisible';
+import { AnclajeVerbal, ANCLAJEEVERBAL_DURATION } from './apple/AnclajeVerbal';
+import { NarrativaNumeros, NARRATIVANNUMEROS_DURATION } from './apple/NarrativaNumeros';
+import { ProximidadConfianza, PROXIMIDADCONFIANZA_DURATION } from './apple/ProximidadConfianza';
+import { CertezaPremium, CERTEZAPREMIUM_DURATION } from './apple/CertezaPremium';
+import { EspejoMensaje, ESPEJOMENSAJE_DURATION } from './apple/EspejoMensaje';
+import { CicloRetroalimentacion, CICLORETROALIMENTACION_DURATION } from './apple/CicloRetroalimentacion';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -322,6 +334,42 @@ export const RemotionRoot: React.FC = () => {
 
       {/* UmbralCambio — mecanismo #71: Weber-Fechner / JND. Barra sube sin ser percibida → cruza el umbral → GLOW. Crema editorial-claro. C. */}
       <Composition id="UmbralCambio" component={UmbralCambio} durationInFrames={UMBRALCAMBIO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SesgoSupervivencia — mecanismo #72: Survivorship bias. Cards brillantes → cámara baja → cementerio de cards apagadas. Dorado. C. */}
+      <Composition id="SesgoSupervivencia" component={SesgoSupervivencia} durationInFrames={SESGOSUPERVIVENCIA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EgoDepletion — mecanismo #73: Decision fatigue. Micro-decisiones apilan y aplastan la decisión importante. Ámbar. C. */}
+      <Composition id="EgoDepletion" component={EgoDepletion} durationInFrames={EGODEPLETION_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* MomentoCero — mecanismo #74: Zero Moment of Truth. Timeline del cliente: decide antes de contactarte. Cyan. C. */}
+      <Composition id="MomentoCero" component={MomentoCero} durationInFrames={MOMENTOCERO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* VozCliente — mecanismo #75: Customer language. Jerga técnica sin respuesta → mismas palabras del cliente → glow y respuesta. Verde. C. */}
+      <Composition id="VozCliente" component={VozCliente} durationInFrames={VOZCLIENTE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SilencioElocuente — mecanismo #76: Whitespace as signal. Propuesta densa vs limpia → el espacio en blanco vende. Crema-dorado. C. */}
+      <Composition id="SilencioElocuente" component={SilencioElocuente} durationInFrames={SILENCIOELOCUENTE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* VentajaInvisible — mecanismo #77: Iceberg effect. Negocio visible → layers ocultas de automatización reveladas. Azul midnight. V. */}
+      <Composition id="VentajaInvisible" component={VentajaInvisible} durationInFrames={VENTAJAINVISIBLE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* AnclajeVerbal — mecanismo #78: Semantic/verbal anchoring. Misma oferta: "COSTO" vs "INVERSIÓN" → cambio de percepción total. Violeta. C. */}
+      <Composition id="AnclajeVerbal" component={AnclajeVerbal} durationInFrames={ANCLAJEEVERBAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* NarrativaNumeros — mecanismo #79: Story vs statistics. Datos fríos se apagan, historia de Juan brilla y genera respuesta. Dorado. C. */}
+      <Composition id="NarrativaNumeros" component={NarrativaNumeros} durationInFrames={NARRATIVANNUMEROS_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* ProximidadConfianza — mecanismo #80: Proximity heuristic. 3 negocios similares: el local sube con glow, los lejanos se hunden. Verde. V. */}
+      <Composition id="ProximidadConfianza" component={ProximidadConfianza} durationInFrames={PROXIMIDADCONFIANZA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CertezaPremium — mecanismo #81: Certainty effect. Valor esperado mayor vs certeza → el 73% elige lo garantizado. Violeta-azul. C. */}
+      <Composition id="CertezaPremium" component={CertezaPremium} durationInFrames={CERTEZAPREMIUM_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EspejoMensaje — mecanismo #82: Mirroring/linguistic matching. Respuesta espejo de las palabras del cliente → confianza inmediata. Rosa. C. */}
+      <Composition id="EspejoMensaje" component={EspejoMensaje} durationInFrames={ESPEJOMENSAJE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CicloRetroalimentacion — mecanismo #83: Feedback loop compounding. 5 nodos orbitan: experiencia→reseña→clientes→servicio→más. Cyan-verde. C. */}
+      <Composition id="CicloRetroalimentacion" component={CicloRetroalimentacion} durationInFrames={CICLORETROALIMENTACION_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
