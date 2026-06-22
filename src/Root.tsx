@@ -92,6 +92,17 @@ import { ProximidadConfianza, PROXIMIDADCONFIANZA_DURATION } from './apple/Proxi
 import { CertezaPremium, CERTEZAPREMIUM_DURATION } from './apple/CertezaPremium';
 import { EspejoMensaje, ESPEJOMENSAJE_DURATION } from './apple/EspejoMensaje';
 import { CicloRetroalimentacion, CICLORETROALIMENTACION_DURATION } from './apple/CicloRetroalimentacion';
+import { PratfallEleva, PRATFALLELEVA_DURATION } from './apple/PratfallEleva';
+import { BaaderMeinhof, BAADERMEINHOF_DURATION } from './apple/BaaderMeinhof';
+import { EfectoFoco, EFECTOFOCO_DURATION } from './apple/EfectoFoco';
+import { SesgoPlanificacion, SESGOPLANEACION_DURATION } from './apple/SesgoPlanificacion';
+import { EfectoOstrica, EFECTOOSTRICA_DURATION } from './apple/EfectoOstrica';
+import { EfectoTribu, EFECTOTRIBU_DURATION } from './apple/EfectoTribu';
+import { ContagioEmocional, CONTAGIOEMOCIONAL_DURATION } from './apple/ContagioEmocional';
+import { CurvaConfianza, CURVACONFIANZA_DURATION } from './apple/CurvaConfianza';
+import { CargaCognitiva, CARGACOGNITIVA_DURATION } from './apple/CargaCognitiva';
+import { MarcaHumana, MARCAHUMANA_DURATION } from './apple/MarcaHumana';
+import { CostoEspera, COSTOESPERA_DURATION } from './apple/CostoEspera';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -370,6 +381,39 @@ export const RemotionRoot: React.FC = () => {
 
       {/* CicloRetroalimentacion — mecanismo #83: Feedback loop compounding. 5 nodos orbitan: experiencia→reseña→clientes→servicio→más. Cyan-verde. C. */}
       <Composition id="CicloRetroalimentacion" component={CicloRetroalimentacion} durationInFrames={CICLORETROALIMENTACION_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PratfallEleva — mecanismo #84: Pratfall effect. Marca perfecta (fría) vs honesta (admite error) → la honesta gana confianza. Rosa-dorado. C. */}
+      <Composition id="PratfallEleva" component={PratfallEleva} durationInFrames={PRATFALLELEVA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* BaaderMeinhof — mecanismo #85: Frequency illusion. Tu marca aparece una vez → el cerebro la ve en todos lados. Cyan. C. */}
+      <Composition id="BaaderMeinhof" component={BaaderMeinhof} durationInFrames={BAADERMEINHOF_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EfectoFoco — mecanismo #86: Spotlight effect. El dueño cree que todos ven sus errores → el cliente ve solo el 10%. Violeta. C. */}
+      <Composition id="EfectoFoco" component={EfectoFoco} durationInFrames={EFECTOFOCO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SesgoPlanificacion — mecanismo #87: Planning fallacy. Barra de proyecto que se extiende más allá del plan. Ámbar. V. */}
+      <Composition id="SesgoPlanificacion" component={SesgoPlanificacion} durationInFrames={SESGOPLANEACION_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EfectoOstrica — mecanismo #88: Ostrich effect. Métricas críticas ignoradas hasta que un número enorme es inevitable. Índigo-ámbar. V. */}
+      <Composition id="EfectoOstrica" component={EfectoOstrica} durationInFrames={EFECTOOSTRICA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EfectoTribu — mecanismo #89: In-group favoritism. Logos genéricos de afuera vs negocio local con glow → ser local es ventaja. Verde-dorado. C. */}
+      <Composition id="EfectoTribu" component={EfectoTribu} durationInFrames={EFECTOTRIBU_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* ContagioEmocional — mecanismo #90: Emotional contagion. Post frío vs post emotivo → engagement explota en el emotivo. Rosa. C. */}
+      <Composition id="ContagioEmocional" component={ContagioEmocional} durationInFrames={CONTAGIOEMOCIONAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CurvaConfianza — mecanismo #91: Dunning-Kruger. Curva de confianza: pico→valle→competencia real con glow. Violeta-cyan. C. */}
+      <Composition id="CurvaConfianza" component={CurvaConfianza} durationInFrames={CURVACONFIANZA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CargaCognitiva — mecanismo #92: Cognitive load / friction. Proceso complejo vs simplificado: el cliente abandona vs compra. Índigo. V. */}
+      <Composition id="CargaCognitiva" component={CargaCognitiva} durationInFrames={CARGACOGNITIVA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* MarcaHumana — mecanismo #93: Brand anthropomorphism. Respuesta robótica vs cálida/humana → la humana conecta. Rosa-violeta. C. */}
+      <Composition id="MarcaHumana" component={MarcaHumana} durationInFrames={MARCAHUMANA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CostoEspera — mecanismo #94: Temporal discounting. Propuesta que pierde valor percibido con cada hora sin seguimiento. Ámbar-rojo. V. */}
+      <Composition id="CostoEspera" component={CostoEspera} durationInFrames={COSTOESPERA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
