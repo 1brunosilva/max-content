@@ -103,6 +103,17 @@ import { CurvaConfianza, CURVACONFIANZA_DURATION } from './apple/CurvaConfianza'
 import { CargaCognitiva, CARGACOGNITIVA_DURATION } from './apple/CargaCognitiva';
 import { MarcaHumana, MARCAHUMANA_DURATION } from './apple/MarcaHumana';
 import { CostoEspera, COSTOESPERA_DURATION } from './apple/CostoEspera';
+import { LicenciaMoral, LICENCIAMORAL_DURATION } from './apple/LicenciaMoral';
+import { EfectoEspectador, EFECTOESPECTADOR_DURATION } from './apple/EfectoEspectador';
+import { PalabraVacia, PALABRAVACIA_DURATION } from './apple/PalabraVacia';
+import { EtiquetaVIP, ETIQUETAVIP_DURATION } from './apple/EtiquetaVIP';
+import { CuandoEntonces, CUANDOENTONCES_DURATION } from './apple/CuandoEntonces';
+import { CasiLlego, CASILLLEGO_DURATION } from './apple/CasiLlego';
+import { EstadoDeAnimo, ESTADODEANIMO_DURATION } from './apple/EstadoDeAnimo';
+import { SaberVsHacer, SABERVSHACER_DURATION } from './apple/SaberVsHacer';
+import { PuntoDeInflexion, PUNTODEINFLEXION_DURATION } from './apple/PuntoDeInflexion';
+import { AtribucionError, ATRIBUCIONERROR_DURATION } from './apple/AtribucionError';
+import { VelocidadRespuesta, VELOCIDADRESPUESTA_DURATION } from './apple/VelocidadRespuesta';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -414,6 +425,39 @@ export const RemotionRoot: React.FC = () => {
 
       {/* CostoEspera — mecanismo #94: Temporal discounting. Propuesta que pierde valor percibido con cada hora sin seguimiento. Ámbar-rojo. V. */}
       <Composition id="CostoEspera" component={CostoEspera} durationInFrames={COSTOESPERA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* LicenciaMoral — mecanismo #95: barra de logros → UNLOCK → oferta tentadora. Moral licensing. Verde-dorado. C. */}
+      <Composition id="LicenciaMoral" component={LicenciaMoral} durationInFrames={LICENCIAMORAL_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EfectoEspectador — mecanismo #96: 7 avatares, nadie actúa → uno rompe con glow. Bystander effect. Cyan-azul. C. */}
+      <Composition id="EfectoEspectador" component={EfectoEspectador} durationInFrames={EFECTOESPECTADOR_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PalabraVacia — mecanismo #97: "CALIDAD" se repite hasta perder sentido → "CLARO" con glow. Semantic satiation. Violeta-midnight. C. */}
+      <Composition id="PalabraVacia" component={PalabraVacia} durationInFrames={PALABRAVACIA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EtiquetaVIP — mecanismo #98: avatar genérico → label VIP cae con glow → se transforma. Labeling/Pygmalion. Dorado. C. */}
+      <Composition id="EtiquetaVIP" component={EtiquetaVIP} durationInFrames={ETIQUETAVIP_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CuandoEntonces — mecanismo #99: intención vaga (dim) vs plan Si-Cuando (glow) → ejecución 3x. Implementation intentions. Verde-cyan. V. */}
+      <Composition id="CuandoEntonces" component={CuandoEntonces} durationInFrames={CUANDOENTONCES_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* CasiLlego — mecanismo #100: contador que para 3 antes de la meta → dolor del "casi" → vuelta 2 llega con glow. Near-miss. Ámbar. C. */}
+      <Composition id="CasiLlego" component={CasiLlego} durationInFrames={CASILLLEGO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* EstadoDeAnimo — mecanismo #101: misma propuesta en frío (28%) vs en caliente (91%). Affect heuristic. Azul-naranja. C. */}
+      <Composition id="EstadoDeAnimo" component={EstadoDeAnimo} durationInFrames={ESTADODEANIMO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SaberVsHacer — mecanismo #102: montaña de conocimiento (dim) vs una acción pequeña (glow, gran output). Knowing-doing gap. Dorado. C. */}
+      <Composition id="SaberVsHacer" component={SaberVsHacer} durationInFrames={SABERVSHACER_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PuntoDeInflexion — mecanismo #103: cargas que se apilan sin cambio → última gota → quiebre con glow Siri. Tipping point. Cyan-verde. C. */}
+      <Composition id="PuntoDeInflexion" component={PuntoDeInflexion} durationInFrames={PUNTODEINFLEXION_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* AtribucionError — mecanismo #104: "FLOJO" stamped → circunstancias rodean → reencuadre con glow. Fundamental attribution error. Dorado-crema. C. */}
+      <Composition id="AtribucionError" component={AtribucionError} durationInFrames={ATRIBUCIONERROR_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* VelocidadRespuesta — mecanismo #105: dos negocios compitiendo, el rápido gana con glow. First-mover / response speed. Cyan-violeta. V. */}
+      <Composition id="VelocidadRespuesta" component={VelocidadRespuesta} durationInFrames={VELOCIDADRESPUESTA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
