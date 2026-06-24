@@ -114,6 +114,16 @@ import { SaberVsHacer, SABERVSHACER_DURATION } from './apple/SaberVsHacer';
 import { PuntoDeInflexion, PUNTODEINFLEXION_DURATION } from './apple/PuntoDeInflexion';
 import { AtribucionError, ATRIBUCIONERROR_DURATION } from './apple/AtribucionError';
 import { VelocidadRespuesta, VELOCIDADRESPUESTA_DURATION } from './apple/VelocidadRespuesta';
+import { RazonPorque, RAZONPORQUE_DURATION } from './apple/RazonPorque';
+import { NumeroConcreto, NUMEROCONCRETO_DURATION } from './apple/NumeroConcreto';
+import { SenalLujo, SENALLUJO_DURATION } from './apple/SenalLujo';
+import { AmbiguedadParaliza, AMBIGUEDADPARALIZA_DURATION } from './apple/AmbiguedadParaliza';
+import { RegretEleccion, REGETELECCION_DURATION } from './apple/RegretEleccion';
+import { AcercaElMensaje, ACERCAELMENSAJE_DURATION } from './apple/AcercaElMensaje';
+import { DopaminaEspera, DOPAMINAESPERA_DURATION } from './apple/DopaminaEspera';
+import { DecisionCircadiana, DECISIONCIRCADIANA_DURATION } from './apple/DecisionCircadiana';
+import { SumaCero, SUMACERO_DURATION } from './apple/SumaCero';
+import { PrecioTrayectoria, PRECIOTRAYECTORIA_DURATION } from './apple/PrecioTrayectoria';
 import { AudioCompositions } from './audio/AudioCompositions';
 
 /**
@@ -458,6 +468,36 @@ export const RemotionRoot: React.FC = () => {
 
       {/* VelocidadRespuesta — mecanismo #105: dos negocios compitiendo, el rápido gana con glow. First-mover / response speed. Cyan-violeta. V. */}
       <Composition id="VelocidadRespuesta" component={VelocidadRespuesta} durationInFrames={VELOCIDADRESPUESTA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* RazonPorque — mecanismo #106: "porque" effect. Sin razón=ignorado, con "porque..."=aceptado. Reason heuristic. Verde-cyan. C. */}
+      <Composition id="RazonPorque" component={RazonPorque} durationInFrames={RAZONPORQUE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* NumeroConcreto — mecanismo #107: scope insensitivity. 1.000.000 adormece; "3 clientes" duele. Ámbar. C. */}
+      <Composition id="NumeroConcreto" component={NumeroConcreto} durationInFrames={NUMEROCONCRETO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SenalLujo — mecanismo #108: Veblen effect. "-50% OFF" genera desconfianza; "Edición Limitada" brilla. Dorado-crema. V. */}
+      <Composition id="SenalLujo" component={SenalLujo} durationInFrames={SENALLUJO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* AmbiguedadParaliza — mecanismo #109: ambiguity aversion. Propuesta vaga se desenfoca; propuesta clara gana con glow. Midnight-azul. C. */}
+      <Composition id="AmbiguedadParaliza" component={AmbiguedadParaliza} durationInFrames={AMBIGUEDADPARALIZA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* RegretEleccion — mecanismo #110: post-choice regret. 12 opciones=35% satisfacción; 3 opciones=88%. Violeta. C. */}
+      <Composition id="RegretEleccion" component={RegretEleccion} durationInFrames={REGETELECCION_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* AcercaElMensaje — mecanismo #111: construal level theory. Mensaje genérico → zoom in → mensaje específico con glow. Cyan. C. */}
+      <Composition id="AcercaElMensaje" component={AcercaElMensaje} durationInFrames={ACERCAELMENSAJE_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* DopaminaEspera — mecanismo #112: anticipatory affect. Barra de progreso con glow; pico de dopamina antes del 100%. Rosa-violeta. C. */}
+      <Composition id="DopaminaEspera" component={DopaminaEspera} durationInFrames={DOPAMINAESPERA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* DecisionCircadiana — mecanismo #113: circadian decision quality. Histograma de horas; 10AM=94%, 2PM=38%. Dorado-naranja. C. */}
+      <Composition id="DecisionCircadiana" component={DecisionCircadiana} durationInFrames={DECISIONCIRCADIANA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* SumaCero — mecanismo #114: zero-sum bias. Balanza que se desequilibra → reencuadre suma positiva; ambos suben con glow. Verde-dorado. C. */}
+      <Composition id="SumaCero" component={SumaCero} durationInFrames={SUMACERO_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
+
+      {/* PrecioTrayectoria — mecanismo #115: price momentum. Mismo $5.000: precio que sube=compran ya; precio que baja=esperan. Ámbar-verde. V. */}
+      <Composition id="PrecioTrayectoria" component={PrecioTrayectoria} durationInFrames={PRECIOTRAYECTORIA_DURATION} fps={30} width={1080} height={1920} defaultProps={{}} />
 
       {/* Variantes con audio (música + SFX sincronizados): "<Id>-A". No tocan el visual. */}
       <AudioCompositions />
