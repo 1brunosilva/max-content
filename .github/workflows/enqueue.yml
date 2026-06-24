@@ -1,0 +1,42 @@
+name: Auto-enqueue mechanisms
+
+# Cuando se pushean mecanismos nuevos (src/apple/*.tsx), genera el queue/*.json
+# de cada uno para que render.yml los renderice solo. Solo encola lo que cambió
+# en ESE push (no el backlog viejo). No auto-publica: todo queda pending_approval.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/apple/**.tsx'
+
+# Evita corridas pisadas si llegan varios pushes seguidos.
+concurrency:
+  group: auto-enqueue
+  cancel-in-progress: false
+
+jobs:
+  enqueue:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed mechanisms and enqueue
+        run: |
+          BEFORE='${{ github.event.before }}'
+          if ! git cat-file -e "${BEFORE}^{commit}" 2>/dev/null; then BEFORE=HEAD~1; fi
+          CHANGED=$(git diff --name-only "$BEFORE" '${{ github.sha }}' -- 'src/apple/*.tsx' | tr '\n' ' ')
+          echo "Cambiados: $CHANGED"
+          node scripts/auto-enqueue.mjs $CHANGED
+
+      - name: Commit queue
+        run: |
+          git config user.name "MAX Robot"
+          git config user.email "max@conceptodevelopment.com"
+          git add queue/
+          git diff --staged --quiet || git commit -m "auto: encolar mecanismos nuevos para render"
+          git push

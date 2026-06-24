@@ -1,0 +1,13 @@
+{
+  "composition": "CurvaConfianza",
+  "name": "CurvaConfianza",
+  "mechanism": "CurvaConfianza",
+  "lever": "trust_curve",
+  "visual_mode": "glassy_dark",
+  "format": "mechanism",
+  "palette": "violet",
+  "hook_text": null,
+  "payoff_text": null,
+  "duration_sec": null,
+  "share_to_feed": false
+}

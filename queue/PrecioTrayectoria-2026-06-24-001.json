@@ -1,0 +1,13 @@
+{
+  "composition": "PrecioTrayectoria",
+  "name": "PrecioTrayectoria",
+  "mechanism": "PrecioTrayectoria",
+  "lever": "anchoring",
+  "visual_mode": "glassy_dark",
+  "format": "mechanism",
+  "palette": "violet",
+  "hook_text": null,
+  "payoff_text": null,
+  "duration_sec": null,
+  "share_to_feed": false
+}
