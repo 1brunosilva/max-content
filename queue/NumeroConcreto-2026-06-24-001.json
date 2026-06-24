@@ -1,0 +1,13 @@
+{
+  "composition": "NumeroConcreto",
+  "name": "El numero concreto",
+  "mechanism": "NumeroConcreto",
+  "lever": "social_proof",
+  "visual_mode": "glassy_dark",
+  "format": "mechanism",
+  "palette": "violet",
+  "hook_text": null,
+  "payoff_text": null,
+  "duration_sec": null,
+  "share_to_feed": false
+}
