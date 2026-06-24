@@ -1,0 +1,41 @@
+name: Daily pick (loop de aprendizaje)
+
+# Todos los días: lee el cerebro + tu gusto, elige 3 mecanismos del backlog
+# (2 sesgados a lo que funciona + 1 explorador) y los encola → render → HQ pending_approval.
+# Freno anti-cola: si hay +15 sin aprobar, saltea. No genera código nuevo. No auto-publica.
+on:
+  schedule:
+    - cron: '0 11 * * *'   # 11:00 UTC = 08:00 Uruguay
+  workflow_dispatch:        # permite correrlo a mano desde GitHub
+
+concurrency:
+  group: daily-pick
+  cancel-in-progress: false
+
+jobs:
+  pick:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Elegir mecanismos del día
+        run: node scripts/daily-pick.mjs
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+
+      - name: Commit cola
+        run: |
+          git config user.name "MAX Robot"
+          git config user.email "max@conceptodevelopment.com"
+          git add queue/
+          git diff --staged --quiet || git commit -m "auto: pick diario (loop de aprendizaje)"
+          git push
