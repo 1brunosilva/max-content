@@ -80,13 +80,14 @@ async function main() {
   // Un tema rechazado 2+ veces = no te gusta → lo evito (salvo que vacíe el pool).
   const dislikedLevers = new Set(Object.entries(rejLeverCount).filter(([, n]) => n >= 2).map(([l]) => l));
 
-  // 4) POOL = mecanismos con archivo, no encolados, no rechazados, y que NO tengan ya un video
+  // 4) POOL = mecanismos del KIT NUEVO (estilo bueno), con archivo, no encolados, no rechazados,
+  //    y que NO tengan ya un video. Los viejos sin kit (AppleAd/CardWheel/experimentos) quedan afuera.
   const used = handled();
   try {
     const allVids = await sb('/videos?select=name,mechanism');  // todo lo que ya tiene video
     allVids.forEach((v) => { if (v.mechanism) used.add(v.mechanism); if (v.name) used.add(v.name); });
   } catch { /* ok */ }
-  const poolAll = Object.keys(idx).filter((id) => idx[id].file && !used.has(id) && !rejected.has(id));
+  const poolAll = Object.keys(idx).filter((id) => idx[id].usesKit && idx[id].file && !used.has(id) && !rejected.has(id));
   if (!poolAll.length) { console.log('⚠ backlog agotado — toca sumar mecanismos nuevos (fase 2).'); return { picked: [] }; }
   // Saco los temas que rechazás seguido — pero si eso deja muy poco, uso todo igual.
   const poolLiked = poolAll.filter((id) => !dislikedLevers.has(idx[id].lever));

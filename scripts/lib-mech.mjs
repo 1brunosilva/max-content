@@ -27,14 +27,16 @@ function walk(dir, out = {}) {
   return out;
 }
 
-// Extrae lever + paleta del header del archivo. Devuelve {lever, palette, file}.
+// Extrae lever + paleta + si usa el kit nuevo. Devuelve {lever, palette, usesKit, file}.
 function meta(file) {
-  const txt = readFileSync(file, 'utf8').slice(0, 1200);
-  const lever = (txt.match(/Lever:\s*([^.\n*]+)/i) || [])[1];
-  const palette = (txt.match(/Paleta:\s*([^.\n*]+)/i) || [])[1];
+  const txt = readFileSync(file, 'utf8');
+  const head = txt.slice(0, 1200);
+  const lever = (head.match(/Lever:\s*([^.\n*]+)/i) || [])[1];
+  const palette = (head.match(/Paleta:\s*([^.\n*]+)/i) || [])[1];
   return {
     lever: lever ? lever.trim().toLowerCase() : null,
     palette: palette ? palette.trim().toLowerCase() : null,
+    usesKit: /from ['"]\.\.?\/kit['"]/.test(txt),  // kit nuevo = estilo bueno; sin kit = viejo/feo
   };
 }
 
@@ -45,7 +47,7 @@ export function buildIndex() {
   const idx = {};
   for (const id of ids) {
     const file = files[id];
-    if (!file) { idx[id] = { lever: null, palette: null, file: null }; continue; }
+    if (!file) { idx[id] = { lever: null, palette: null, usesKit: false, file: null }; continue; }
     idx[id] = { ...meta(file), file };
   }
   return idx;
