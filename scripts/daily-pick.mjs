@@ -65,12 +65,20 @@ async function main() {
     if (!winningLever && tl) winningLever = (tl.parameter_value || '').toLowerCase();
   } catch (e) { console.log('aviso: sin insights aún —', e.message); }
 
-  // 3) TU GUSTO: mecanismos rechazados (excluir del pool)
+  // 3) TU GUSTO: mecanismos rechazados (excluir) + temas que rechazás seguido (deprioritizar)
   let rejected = new Set();
+  const rejLeverCount = {};
   try {
-    const rej = await sb('/videos?status=eq.rejected&select=name,mechanism');
-    rej.forEach((v) => { if (v.mechanism) rejected.add(v.mechanism); if (v.name) rejected.add(v.name); });
+    const rej = await sb('/videos?status=eq.rejected&select=name,mechanism,notes');
+    rej.forEach((v) => {
+      if (v.mechanism) rejected.add(v.mechanism);
+      if (v.name) rejected.add(v.name);
+      const lv = idx[v.mechanism]?.lever || idx[v.name]?.lever;  // tema del rechazado
+      if (lv) rejLeverCount[lv] = (rejLeverCount[lv] || 0) + 1;
+    });
   } catch { /* ok */ }
+  // Un tema rechazado 2+ veces = no te gusta → lo evito (salvo que vacíe el pool).
+  const dislikedLevers = new Set(Object.entries(rejLeverCount).filter(([, n]) => n >= 2).map(([l]) => l));
 
   // 4) POOL = mecanismos con archivo, no encolados, no rechazados, y que NO tengan ya un video
   const used = handled();
@@ -78,8 +86,11 @@ async function main() {
     const allVids = await sb('/videos?select=name,mechanism');  // todo lo que ya tiene video
     allVids.forEach((v) => { if (v.mechanism) used.add(v.mechanism); if (v.name) used.add(v.name); });
   } catch { /* ok */ }
-  const pool = Object.keys(idx).filter((id) => idx[id].file && !used.has(id) && !rejected.has(id));
-  if (!pool.length) { console.log('⚠ backlog agotado — toca sumar mecanismos nuevos (fase 2).'); return { picked: [] }; }
+  const poolAll = Object.keys(idx).filter((id) => idx[id].file && !used.has(id) && !rejected.has(id));
+  if (!poolAll.length) { console.log('⚠ backlog agotado — toca sumar mecanismos nuevos (fase 2).'); return { picked: [] }; }
+  // Saco los temas que rechazás seguido — pero si eso deja muy poco, uso todo igual.
+  const poolLiked = poolAll.filter((id) => !dislikedLevers.has(idx[id].lever));
+  const pool = poolLiked.length >= PER_DAY ? poolLiked : poolAll;
 
   const seed = Number(new Date().toISOString().slice(0, 10).replace(/-/g, ''));
   const shuffled = seededShuffle(pool, seed);
@@ -108,7 +119,7 @@ async function main() {
   }
 
   console.log(`🎯 lever ganador: ${winningLever || '(sin datos aún → elijo por diversidad)'} ${topMech ? '(via ' + topMech + ')' : ''}`);
-  console.log(`📋 cola actual: ${pending.length}/${QUEUE_CAP} · pool disponible: ${pool.length}`);
+  console.log(`📋 cola actual: ${pending.length}/${QUEUE_CAP} · pool disponible: ${pool.length}${dislikedLevers.size ? ` · evito temas: ${[...dislikedLevers].join(', ')}` : ''}`);
   console.log(`✅ elegidos hoy: ${picks.map((id) => `${id}[${idx[id].lever || 'explorador'}]`).join(', ')}`);
 
   if (DRY) { console.log('(dry-run: no escribo queue)'); return { picked: picks, dry: true }; }
