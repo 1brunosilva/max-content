@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'queue/*.json'
+  workflow_dispatch: {}
 
 jobs:
   render:

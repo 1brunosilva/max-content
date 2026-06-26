@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,3 +40,8 @@ jobs:
           git add queue/
           git diff --staged --quiet || git commit -m "auto: pick diario (loop de aprendizaje)"
           git push
+
+      - name: Disparar render (el push con GITHUB_TOKEN no lo dispara solo)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run render.yml
